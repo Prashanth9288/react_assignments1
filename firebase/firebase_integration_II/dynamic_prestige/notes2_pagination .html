@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    input,button,select{
+      margin:5px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button{
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover{
+      background-color: #0056b3;
+    }
+    #movieList{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    #movieList div{
+      background-color: white;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      width: 180px;
+    }
+    img{
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎬 Movie Search</h2>
+  <!--search Input-->
+  <input type="text" id="searchInput" placeholder="Enter Movie Name">
+   <!--Sorting DropDown-->
+   <select id="sortOptions" onchange="sortMovies()">
+    <option value="year-asc">Year (Oldest First)</option>
+    <option value="year-desc">Year (Newest First)</option>
+   </select>
+
+     <button onclick="searchMovies()">Search</button>
+
+     <!--Filter by Type-->
+     <select id="filterOptions">
+      <option value="">All Types</option>
+      <option value="movie">Movie</option>
+      <option value="series">Series</option>
+      <option value="episode">Episode</option>
+     </select>
+
+<!--Movie Results Container-->
+  <div id="movieList"></div>
+
+
+  <button onclick="prevPage()">Prev</button>
+  <button onclick="nextPage()">Next</button>
+  
+</body>
+<script>
+  let API_KEY="3b3ae187";
+  let moviesData=[]; // Globally storing fetched data.
+  let page=1;
+  let currentType=""
+  // Function to search movies
+  async function searchMovies(page) {
+    let query = document.getElementById('searchInput').value
+    let type=document.getElementById('filterOptions').value; //get selected type
+    if(!query) return alert("please enter movie name.");
+   
+    let url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}&page=${page} `;
+    if(currentType) url+=`&type=${currentType}`
+    if (type) {
+      url += `&type=${type}`; // add type to API if selected
+    }
+
+    let res = await fetch(url);
+    let data= await res.json();
+
+    let container=document.getElementById('movieList')
+
+if(data.Search){
+moviesData=data.Search // store the fetched data
+
+displayMovies(moviesData) // show them
+}else{
+  container.innerHTML="<p> No results found</p>";
+}
+}
+
+// Function to display movies in the DOM
+function displayMovies(movies){
+  let container=document.getElementById('movieList');
+container.innerHTML=""; // clear previous results
+
+movies.forEach((movie)=>{
+  let movieCard = document.createElement("div");
+  movieCard.innerHTML=`
+  <h3>${movie.Title} (${movie.Year})</h3>
+  <img src="${movie.Poster !=="N/A" ? movie.Poster : 'https://via.placeholder.com/150'}" alt="${movie.Title}">`;
+  container.appendChild(movieCard)
+});
+}
+// Function to sort movies 
+function sortMovies(){
+  let sortBy=document.getElementById('sortOptions').value;
+
+  let sortedMovies=[...moviesData];// clone to avoid mutating original 
+  sortedMovies.sort((a,b)=>{
+    let yearA=parseInt(a.Year);
+    let yearB=parseInt(b.Year);
+    if(isNAN(yearA)) yearA=0;
+    if(isNAN(yearB)) yearB=0;
+
+    if(sortBy==="year-asc") return yearA-yearB
+    if(sortBy==="year-desc") return yearB-yearA
+  });
+
+  displayMovies(sortedMovies)
+}
+
+async function filterMovies(type){
+  currentType=type;
+  page=1
+  searchMovies(page)
+}
+
+
+ function prevPage(){
+  page-=1
+  searchMovies(page)
+ }
+
+function nextPage(){
+  page+=1;
+  searchMovies(page)
+}
+
+
+
+
+
+
+</script>
+</html>

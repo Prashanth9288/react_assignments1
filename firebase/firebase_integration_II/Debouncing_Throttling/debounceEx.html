@@ -1,0 +1,39 @@
+<!-- Debouncing ensures that a function is executed only after a specific time has passed since the last time the event was triggered. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounced Search</title>
+</head>
+<body>
+  <input type="text" id="search" placeholder="Search...">
+
+  <script>
+    // Function to simulate API call
+    function fetchData(query){
+      console.log("Fetching data for:",query);
+    }
+    // Debounce function
+
+    function debounce(func,delay){
+      let timer;
+      return function(...args){
+        clearTimeout(timer);
+        timer=setTimeout(()=>{
+          func.apply(this,args);
+        },delay);
+      };
+    }
+
+    const input = document.getElementById("search");
+    const debouncedFetch=debounce(fetchData,500); // 500ms delay
+
+    input.addEventListener("input",(e)=>{
+      debouncedFetch(e.target.value);
+    });
+  </script>
+</body>
+</html>

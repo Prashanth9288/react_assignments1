@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Auth Demo</title>
+</head>
+<body>
+  <h2>Firebase Authentication</h2>
+
+  <!-- Sign Up Form -->
+  <div id="signup-container">
+    <h3>Sign Up</h3>
+    <input type="email" id="signup-email" placeholder="Email">
+    <input type="password" id="signup-password" placeholder="Password">
+    <button id="signup-btn">Sign Up</button>
+    <p id="signup-message"></p>
+  </div>
+
+  <!-- Login Form -->
+  <div id="login-container">
+    <h3>Login</h3>
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-password" placeholder="Password">
+    <button id="login-btn">Login</button>
+    <p id="login-message"></p>
+  </div>
+
+  <!-- Logout Section -->
+  <div id="logout-container" style="display:none;">
+    <h3>Welcome <span id="user-email"></span></h3>
+    <button id="logout-btn">Logout</button>
+  </div>
+
+  <script type="module">
+    // Firebase SDK imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+    // 👉 Paste your Firebase config here:
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID",
+      measurementId: "YOUR_MEASUREMENT_ID"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Sign Up
+    document.getElementById("signup-btn").addEventListener("click", () => {
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          document.getElementById("signup-message").innerText = "Signup successful!";
+        })
+        .catch((error) => {
+          document.getElementById("signup-message").innerText = error.message;
+        });
+    });
+
+    // Login
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          document.getElementById("login-message").innerText = "Login successful!";
+        })
+        .catch((error) => {
+          document.getElementById("login-message").innerText = error.message;
+        });
+    });
+
+    // Logout
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      signOut(auth).then(() => {
+        alert("Logged out.");
+      });
+    });
+
+    // Auth state change listener
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.getElementById("logout-container").style.display = "block";
+        document.getElementById("signup-container").style.display = "none";
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("user-email").innerText = user.email;
+      } else {
+        document.getElementById("logout-container").style.display = "none";
+        document.getElementById("signup-container").style.display = "block";
+        document.getElementById("login-container").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

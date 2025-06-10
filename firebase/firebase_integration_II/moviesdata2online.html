@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Firebase Movie Database</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    input {
+      padding: 8px;
+      margin: 5px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+    }
+
+    .movie-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px #aaa;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      width: 200px;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .edit-btn {
+      background-color: blue;
+      color: white;
+      border: none;
+    }
+
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Firebase Movie Database</h2>
+
+  <!-- Hidden input to track if editing -->
+  <input type="hidden" id="movieId" />
+
+  <!-- Movie Input Form -->
+  <input type="text" id="title" placeholder="Movie Title" />
+  <input type="number" id="year" placeholder="Year" />
+  <input type="text" id="genre" placeholder="Genre" />
+  <input type="text" id="image" placeholder="Image URL" />
+  <button onclick="saveMovie()">Save Movie</button>
+
+  <h3>Movie List</h3>
+  <div id="movieList"></div>
+
+  <script>
+    // Your Firebase Realtime Database URL (Update with your own)
+    const firebaseURL = "https://movierulzdata-default-rtdb.asia-southeast1.firebasedatabase.app/movies";
+
+    // Fetch movies from Firebase
+    async function fetchMovies() {
+      const res = await fetch(`${firebaseURL}.json`);
+      const data = await res.json();
+      if (!data) return [];
+      return Object.entries(data).map(([id, movie]) => ({ id, ...movie }));
+    }
+
+    // Display movies in the UI
+    async function displayMovies() {
+      const movies = await fetchMovies();
+      const movieList = document.getElementById('movieList');
+      movieList.innerHTML = "";
+
+      if (movies.length === 0) {
+        movieList.innerHTML = `<p style="color: gray; font-style: italic;">🎬 No movies in the database yet. Add your first one!</p>`;
+        return;
+      }
+
+      movies.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.className = "movie-card";
+        movieCard.innerHTML = `
+          <img src="${movie.image}" alt="${movie.title}">
+          <h4>${movie.title} (${movie.year})</h4>
+          <p>${movie.genre}</p>
+          <button class="edit-btn" onclick="editMovie('${movie.id}', '${movie.title}', '${movie.year}', '${movie.genre}', '${movie.image}')">Edit</button>
+          <button class="delete-btn" onclick="deleteMovie('${movie.id}')">Delete</button>
+        `;
+        movieList.appendChild(movieCard);
+      });
+    }
+
+    // Save new or edited movie
+    async function saveMovie() {
+      const id = document.getElementById('movieId').value;
+      const title = document.getElementById('title').value.trim();
+      const year = document.getElementById('year').value.trim();
+      const genre = document.getElementById('genre').value.trim();
+      const image = document.getElementById('image').value.trim();
+
+      if (!title || !year || !genre || !image) {
+        alert("⚠️ Please fill in all fields before saving.");
+        return;
+      }
+
+      const movie = { title, year, genre, image };
+
+      if (id) {
+        // Update movie
+        await fetch(`${firebaseURL}/${id}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(movie)
+        });
+      } else {
+        // Add new movie
+        await fetch(`${firebaseURL}.json`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(movie)
+        });
+      }
+
+      clearForm();
+      displayMovies();
+    }
+
+    // Clear form after save/edit
+    function clearForm() {
+      document.getElementById('movieId').value = "";
+      document.getElementById('title').value = "";
+      document.getElementById('year').value = "";
+      document.getElementById('genre').value = "";
+      document.getElementById('image').value = "";
+    }
+
+    // Edit movie - load data into form
+    function editMovie(id, title, year, genre, image) {
+      document.getElementById('movieId').value = id;
+      document.getElementById('title').value = title;
+      document.getElementById('year').value = year;
+      document.getElementById('genre').value = genre;
+      document.getElementById('image').value = image;
+    }
+
+    // Delete movie
+    async function deleteMovie(movieId) {
+      await fetch(`${firebaseURL}/${movieId}.json`, {
+        method: 'DELETE'
+      });
+      displayMovies();
+    }
+    
+    // Load movies on startup
+    displayMovies();
+  </script>
+</body>
+</html>

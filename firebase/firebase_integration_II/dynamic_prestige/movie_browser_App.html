@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Explorer</title>
+
+  <style>
+    body{
+      font-family: Arial,sans-serif;
+      text-align: center;
+      background: #f0f0f0;
+      margin: 20px;
+    }
+    input,select,button{
+      padding: 10px;
+      margin:5px;
+      font-size: 16px;
+    }
+    #bookList{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📚 Book Explorer</h2>
+  <!--search for books-->
+  <input type="text" id="searchInput" placeholder="Search books...">
+  <!--Filter by category (eg Fiction, History)-->
+  <select id="filterOptions">
+    <option value="">All categories</option>
+    <option value="fiction">Fiction</option>
+    <option value="history">History</option>
+    <option value="science">Science</option>
+  </select>
+
+  <!--sort by publish year-->
+  <select id="sortOptions">
+    <option value="">Sort_Year</option>
+    <option value="asc">Year Ascending</option>
+    <option value="desc">Year Descending</option>
+  </select>
+
+  <!--Trigger search-->
+  <button onclick="searchBooks()">Search</button>
+
+  <!-- Container for displaying books-->
+   <div id="bookList"></div>
+
+   <!--Pagination buttons-->
+   <button onclick="prevPage()">Prev</button>
+   <button onclick="nextPage()">Next</button>
+</body>
+<script>
+  let page=1;
+  let booksData=[];
+
+  //Function to fetch books from Open Library API
+
+  async function searchBooks(){
+    const query=document.getElementById('searchInput').value;
+    const filter=document.getElementById('filterOptions').value;
+    if(!query) return alert("Please enter a book name ");
+
+    let url=`https://openLibrary.org/search.json?q=${query}&page=${page}`;
+    let res=await fetch(url);
+    let data = await res.json();
+
+    booksData=data.docs;
+
+    if(filter){
+      booksData = booksData.filter(book=>book.subject && book.subject.includes(filter));
+    }
+    displayBooks(booksData)
+  }
+
+  // Function to display books
+  function displayBooks(books){
+    const container=document.getElementById('bookList');
+    container.innerHTML="";
+
+    books.forEach(book=>{
+      const div=document.createElement('div');
+      div.className='book-card';
+      div.innerHTML=`
+      <h3>${book.title}</h3>
+      <p><strong>Author:</strong> ${book.author_name ? book.author_name[0] : 'N/A'}</p>
+      <p><strong>Year:</strong> ${book.first_publish_year || 'N/A'} </p>
+      `;
+      container.appendChild(div)
+    });
+  }
+
+  // sort books based on year
+
+  document.getElementById('sortOptions').addEventListener('change',() =>{
+    const sort = document.getElementById('sortOptions').value;
+    booksData.sort((a,b)=>{
+      const yearA=a.first_publish_year || 0;
+      const yearB=b.first_publish_year || 0;
+      return sort=== 'asc' ? yearA - yearB : yearB-yearA;
+    });
+
+  });
+
+
+  // Pagination functions
+
+  function prevPage(){
+    if(page>1){
+      page--;
+      searchBooks();
+    }
+  }
+
+  function nextPage(){
+    page++;
+    searchBooks();
+  }
+</script>
+</html>

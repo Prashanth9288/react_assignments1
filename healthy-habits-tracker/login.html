@@ -1,0 +1,36 @@
+<!-- Login page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Healthy Habits Tracker 🔐</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign Up</button>
+  </div>
+
+  <script type="module">
+    import { logIn, signUp } from './js/auth.js';
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      logIn(email, password);
+    });
+
+    document.getElementById("signupBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      signUp(email, password);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Healthy Habits Tracker</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script type="module" src="js/main.js" defer></script>
+  <script src="js/inject.js" defer></script>
+</head>
+<style>
+.rotating-box {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateBox 10s infinite linear;
+        margin: 0 auto;
+      
+      
+    }
+
+    .rotating-box div {
+      width: 90%;
+      height: 90%;
+      position: absolute;
+      background-size: cover;
+      background-position: center;
+      transform-origin: center center;
+        border-radius: 10px;
+    
+    }
+
+    .rotating-box div:nth-child(1) {
+      background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1000w,f_auto,q_auto:best/rockcms/2023-01/230102-water-hydration-pitcher-stock-ac-457p-05973b.jpg');
+      transform: rotateY(0deg) translateZ(100px);
+    }
+
+    .rotating-box div:nth-child(2) {
+      background-image: url('https://www.crunch.com/wp-content/uploads/2023/01/CR011SLTH_January_1.30_Hub-Images_5-Health-Related-Components-of-Fitness_1.26.235.jpg');
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .rotating-box div:nth-child(3) {
+      background-image: url('https://i.scdn.co/image/ab67616d0000b2732c03b769162480effcfd6b72');
+      transform: rotateY(180deg) translateZ(100px);
+    }
+
+    .rotating-box div:nth-child(4) {
+      background-image: url('https://www.sincera.in/wp-content/uploads/2017/08/mental-health-1080x675.jpeg');
+      transform: rotateY(270deg) translateZ(100px);
+    }
+
+    .rotating-box div:nth-child(5) {
+      background-image: url('https://fresnochamber.com/wp-content/uploads/2022/05/5-Productivity-Hacks-1.jpg');
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .rotating-box div:nth-child(6) {
+      background-image: url('https://www.moshikids.com/wp-content/uploads/2022/04/the-importance-of-sleep-balance-mood-learning-and-motivation-1536x864.jpg');
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    @keyframes rotateBox {
+      0% {
+        transform: rotate3d(1, 1, 0, 0deg);
+      }
+      100% {
+        transform: rotate3d(1, 1, 0, 360deg);
+      }
+    }
+
+    #welcome-message {
+      text-align:left;
+      margin-bottom: 100px;
+    }  
+    
+    
+
+   
+    
+
+
+
+
+</style>
+
+
+
+<body>
+
+  <!-- Injected Components -->
+  <div id="header-container"></div>
+
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+   <main id="main-content" style="background-color: aquamarine;">
+      <div style="justify-content: left;" id="welcome-message">
+        <h1>Welcome to Your Dashboard!</h1>
+      <p>Track your habits and stay motivated.</p>
+      </div>
+      
+      <!-- <h2>Welcome!</h2>
+      <p>Select a menu item from the left to get started.</p> -->
+
+
+      <div class="rotating-box">
+        <div> </div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+    </main>
+  </div>
+
+  </div>
+
+  <div id="footer-container"></div>
+
+
+  <script>
+    function loadHTML(id, file) {
+  fetch(file)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadHTML("header-container", "header.html");
+  loadHTML("sidebar-container", "sidebar.html");
+  loadHTML("footer-container", "footer.html");
+});
+
+  </script>
+
+</body>
+</html>

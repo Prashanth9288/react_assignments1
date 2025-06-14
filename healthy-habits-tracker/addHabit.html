@@ -1,0 +1,24 @@
+<!-- Habit creation modal page -->
+
+<form id="habitForm" class="habit-form">
+  <input id="habitName" type="text" placeholder="Enter Habit Name" required />
+  
+  <select id="habitCategory" required>
+    <option value="">Select Category</option>
+    <option value="Fitness">Fitness</option>
+    <option value="Hydration">Hydration</option>
+    <option value="Sleep">Sleep</option>
+    <option value="Meditation">Meditation</option>
+  </select>
+  
+  <select id="habitFrequency" required>
+    <option value="">How often?</option>
+    <option value="Daily">Daily</option>
+    <option value="Weekly">Weekly</option>
+  </select>
+  
+  <input id="habitTarget" type="text" placeholder="e.g. Drink 8 glasses" required />
+
+  <button type="submit">Create Habit</button>
+  <button type="button" id="cancelBtn">Cancel</button>
+</form>

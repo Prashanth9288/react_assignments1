@@ -1,0 +1,66 @@
+<!-- Main dashboard UI -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Healthy Habits Tracker</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/darkmode.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Healthy<span>Habits</span> Tracker</h1>
+    <button id="toggleDarkMode">🌙</button>
+  </header>
+
+  <div class="top-bar">
+    <div><strong>🗓️ 2/5</strong> completed today</div>
+    <div><strong>❤️ 12</strong> day best streak</div>
+    <nav>
+      <a href="index.html" class="active">My Habits</a>
+      <a href="analytics.html">Analytics</a>
+    </nav>
+    <button id="addHabitBtn">+ Add New Habit</button>
+  </div>
+
+  <main id="habitContainer" class="habits-container">
+    <!-- Habit cards will be dynamically injected here from dashboard.js -->
+  </main>
+
+  <!-- Add Habit Modal -->
+  <div class="modal" id="habitModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Create New Habit</h2>
+      <input type="text" id="habitName" placeholder="e.g., Morning Meditation">
+      <select id="habitCategory">
+        <option value="">Select a category</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Hydration">Hydration</option>
+        <option value="Mindfulness">Mindfulness</option>
+        <option value="Sleep">Sleep</option>
+      </select>
+      <input type="text" id="dailyTarget" placeholder="e.g., 10 minutes, 8 glasses">
+      <button id="createHabit">Create Habit</button>
+    </div>
+  </div>
+
+  <button id="darkModeToggle" class="dark-toggle-btn">🌙 Dark Mode</button>
+
+
+  <section id="ai-suggestions-section">
+  <h3>🤖 Smart Suggestions for You</h3>
+  <div id="ai-suggestions" class="suggestion-box"></div>
+</section>
+
+  <!-- Scripts -->
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+  <script type="module" src="js/darkmode.js"></script>
+  <script type="module" src="js/notify.js"></script>
+</body>
+</html>

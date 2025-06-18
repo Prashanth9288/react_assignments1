@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="parent">
+    <p>I am inside a parent DIV</p>
+  </div>
+  <!-- <div id="parent">I am a DIV</div>
+  <h1 id="heading">I am a heading</h1>
+  <p id="ptag">This a para</p> -->
+  <p id="pTag">This is p tag have a ID</p>
+  <p class="red">Hello how are u ?</p>
+  <p class="red">I am great</p>
+  <p class="red">what about u </p>
+  <script>
+    //document.getElementById('parent')
+    // let heading = document.getElementById('heading')
+    // console.log(heading.innerText)
+    // let paratag = document.getElementById('ptag').innerText
+    // console.log(paratag)
+    //   console.log(document.getElementById('pTag'))
+    //   let p = document.getElementsByClassName('red')
+    //   console.log(p)
+
+
+    // console.log(document.querySelector('p'))
+    // console.log(document.querySelector('.red'))
+    // console.log(document.querySelector('.red'))
+
+    // let pByTagName = document.getElementsByTagName('p')
+    // console.log(pByTagName)
+    // console.log(document.querySelectorAll('p'))
+
+    //console.log(document.querySelector('#parent>p'))
+
+    let p = document.getElementById('pTag')
+    p.innerText = "changed with the DOM"
+    p.style.color = 'red'
+
+
+    let div = document.getElementById('parent')
+    p.innerHTML = "<p>This p Tag is add from DOM</p>"
+  </script>
+</body>
+
+
+</html>
+
+</html>
+
+<!-- 1. getElementById
+2.getElementsByClassName
+3.getElementsByTagName
+4.querySelector
+5.querySelectorAll -->

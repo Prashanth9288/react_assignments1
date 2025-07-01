@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management App</title>
+  <style>
+    task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task Management</h1>
+  <div>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+
+    <button id="addTaskButton">Add Task</button>
+  </div>
+
+  <div>
+    <button id="showAllTasks">Show All Tasks</button>
+    <button id="showCompletedTasks">Show Completed </button>
+    <button id="showIncompleteTasks">Show Incomplete</button>
+  </div>
+
+  <ul id="taskList" class="task-list"></ul>
+
+
+
+</body>
+<script>
+  const taskInput = document.getElementById('taskInput');
+  const addTaskButton = document.getElementById('addTaskButton');
+  const taskList = document.getElementById('taskList');
+  const showAllTasksButton = document.getElementById('showAllTasks');
+  const showCompletedTasksButton = document.getElementById('showCompletedTasks');
+  const showIncompleteTasksButton = document.getElementById('showIncompleteTasks');
+
+  let tasks = [];
+  addTaskButton.addEventListener('click', () => {
+    const taskText = taskInput.value.trim();
+
+    if (taskText !== '') {
+      const newTask = { text: taskText, completed: false };
+      tasks.push(newTask);
+      renderTasks(tasks);
+      taskInput.value = '';
+    }
+  });
+
+  function renderTasks(taskArray) {
+    taskList.innerHTML = '';
+
+    taskArray.map((task, index) => {
+      const li = document.createElement('li');
+      li.className = 'task-item';
+
+      li.innerHTML = `
+      <span class="${task.completed ? 'completed' : ''}">${task.text}</span>
+  <button onclick="toggleTask(${index})">Toggle</button>
+  <button onclick="deleteTask(${index})">Delete</button>
+  `;
+
+      taskList.appendChild(li);
+    });
+  }
+
+  function toggleTask(index) {
+    tasks[index].completed = !tasks[index].completed;
+    renderTasks(tasks);
+  }
+
+  function deleteTask(index) {
+    tasks.splice(index, 1);
+    renderTasks(tasks);
+  }
+
+  showCompletedTasksButton.addEventListener('click', () => {
+    const completedTasks = tasks.filter(task => task.completed);
+    renderTasks(completedTasks);
+  })
+
+  showIncompleteTasksButton.addEventListener('click', () => {
+    const incompleteTasks = tasks.filter(task => !task.completed);
+    renderTasks(incompleteTasks)
+  })
+
+  showAllTasksButton.addEventListener('click', () => {
+    renderTasks(task)
+  });
+</script>
+
+</html>

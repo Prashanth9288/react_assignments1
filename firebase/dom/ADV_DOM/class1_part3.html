@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <div id="parent">
+    <p id="child">Hello I am child</p>
+  </div> -->
+  <!-- <div class="red">I am a DIV 1</div>
+  <div class="red">I am a DIV 2</div>
+  <div class="red">I am a DIV 3</div>
+  <div class="red">I am a DIV 4</div>
+  <div class="red">I am a DIV 5</div>
+  <div class="red">I am a DIV 6</div>
+  <div class="red">I am a DIV 7</div>
+  <div class="red">I am a DIV 8</div>
+  <div class="red">I am a DIV 9</div>
+  <div class="red">I am a DIV 10</div>
+
+  <p id="p">Hello World.</p> -->
+
+  <table>
+    <tbody>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+      <tr>
+        <td>I am table data </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+<script>
+  // //document.getElementById('p').style.color = "red"
+
+  // let htmlCollection = document.getElementsByClassName('red');
+  // // console.log(htmlCollection)
+
+  // // htmlCollection.style.color = "red"
+
+  // for (let i = 0; i < htmlCollection.length; i++) {
+  //  // htmlCollection[i].style.color = "red"
+  //   htmlCollection[i].style.fontsize = "30px"
+  // }
+  // let modeList = document.querySelectorAll('.red')
+
+  // NodeList.forEach((ele, index) => {
+  //   ele.style.color = "red"
+  // })
+
+
+  let tableRows = document.querySelectorAll('tr');
+
+  tableRows.forEach((ele, index) => {
+    if (index % 2 == 0) {
+      ele.style.backgroundColor = "lightblue"
+    }
+    else {
+      ele.style.backgroundColor = "Lightgray"
+    }
+  })
+
+</script>
+
+</html>
+
+<!-- 
+1.DOM.
+2.Selecting and Manipulating Elements.
+3.Create and Remove Elements.
+
+4.Events.
+5.Loops .
+-->

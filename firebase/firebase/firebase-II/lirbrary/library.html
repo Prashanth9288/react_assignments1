@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management</title>
+  <script src="library_management.js" defer></script>
+
+
+</head>
+
+<body>
+
+
+  <h1>Library Management System</h1>
+  <form id="book-form">
+    <input type="text" id="title" placeholder="Book Title" required />
+    <input type="text" placeholder="Author" id="author" required />
+    <input type="text" placeholder="Genre" id="genre" required />
+    <input type="number" id="year" placeholder="Published Year" required />
+    <select id="available">
+      <option value="Yes">Available</option>
+      <option value="No">Not Available</option>
+    </select>
+    <button type="submit">Add Book</button>
+  </form>
+  <h2>Book List</h2>
+  <table border="1" id="book-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Year</th>
+        <th>Available</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+
+    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDuV_kKgi14TDkyreIFhyJkMqf5JWo9MJg",
+      authDomain: "notes-app-553cb.firebaseapp.com",
+      databaseURL: "https://notes-app-553cb-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "notes-app-553cb",
+      storageBucket: "notes-app-553cb.firebasestorage.app",
+      messagingSenderId: "24205376648",
+      appId: "1:24205376648:web:fc0f82b2d0777a9953f33d",
+      measurementId: "G-9D1VWB0X95"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    window.firebase = {
+      database: () => getDatabase(app)
+    };
+  </script>
+
+</html>
+
+
+<!-- 
+Movie Manager: Replace books with movies; add rating, director.
+
+Todo List with Firebase: Add status (done/not), sort by due date.
+
+Student Directory: Add student details, filter by class, grade, etc.
+
+Product Inventory: Add quantity, category, in-stock status. -->
+
+<!-- Expense Tracker: Log expenses with amount, date, category, and filter by month. -->

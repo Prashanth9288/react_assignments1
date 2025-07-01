@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <div id="hoverDiv" style="width: 200px; height: 200px; background-color: lightblue; text-align: center;">Hover on me
+    !..
+  </div> -->
+
+  <div id="parentDiv" style="padding:20px ;background-color:pink; width: 300px;  height: 300px ">
+    <div id="childDiv" style="padding: 30px; background-color: lightgreen; width:150px ; height: 150px;"></div>
+  </div>
+</body>
+<!-- <script>
+  const div = document.getElementById('hoverDiv');
+
+  div.addEventListener(" mouseover", ()=> {
+    div.style.backgroundColor = "Lightgreen"
+    })
+    div.addEventListener("mouseout", () => {
+    div.style.backgroundColor = "Lightblue"
+    })
+    </script> -->
+
+<!-- <script>
+  isBlue = true
+  const div = document.getElementById('hoverDiv');
+
+  div.addEventListener("dblclick", () => {
+    div.style.backgroundColor = isBlue ? "Lightgreen" : "Lightblue"
+    isBlue = !isBlue
+  })
+</script> -->
+
+
+<script>
+  document.getElementById('parentDiv').addEventListener("click", () => {
+    alert("Parent Div Clicked")
+  })
+
+  document.getElementById("childDiv").
+    addEventListener("click", (event) => {
+      alert("Child Div is Clicked") 
+      event.stopPropagation();
+    })
+</script>
+
+
+</html>
+
+<!-- 1.change the text
+2. keyPress
+3. -->

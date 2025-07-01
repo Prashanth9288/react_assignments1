@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Student Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input,
+    select,
+    button {
+      margin: 5px;
+      padding: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    #pagination button {
+      margin: 0 5px;
+    }
+
+    .active-page {
+      font-weight: bold;
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Student Manager Dashboard</h1>
+
+  <!-- Filters -->
+  <input type="text" id="searchInput" placeholder="Search by name or grade" />
+  <select id="gradeFilter">
+    <option value="">All Grades</option>
+    <option value="9th">9th</option>
+    <option value="10th">10th</option>
+    <option value="11th">11th</option>
+    <option value="12th">12th</option>
+  </select>
+  <select id="sectionFilter">
+    <option value="">All Sections</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+  </select>
+  <select id="sortOption">
+    <option value="">Sort</option>
+    <option value="name_asc">Name A-Z</option>
+    <option value="name_desc">Name Z-A</option>
+    <option value="score_asc">Score ↑</option>
+    <option value="score_desc">Score ↓</option>
+  </select>
+
+  <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Grade</th>
+        <th>Section</th>
+        <th>Score</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div id="pagination"></div>
+
+  <!-- Form -->
+  <h3 id="formTitle">Add Student</h3>
+  <form id="studentForm">
+    <input type="hidden" id="studentId" />
+    <input type="text" id="name" placeholder="Name" required minlength="3" />
+    <input type="number" id="age" placeholder="Age (10–20)" min="10" max="20" required />
+    <select id="grade" required>
+      <option value="">Grade</option>
+      <option value="9th">9th</option>
+      <option value="10th">10th</option>
+      <option value="11th">11th</option>
+      <option value="12th">12th</option>
+    </select>
+    <select id="section" required>
+      <option value="">Section</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+    <input type="number" id="score" placeholder="Score (0–100)" min="0" max="100" required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const BASE_URL = "https://masai-studentmanager-default-rtdb.asia-southeast1.firebasedatabase.app/students"; // REPLACE with your actual Firebase URL
+    let students = {};
+    let filtered = [];
+    let currentPage = 1;
+    const itemsPerPage = 2;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchStudents();
+      document.getElementById('studentForm').addEventListener('submit', handleForm);
+      document.getElementById('searchInput').addEventListener('input', debounce(applyFilters, 300));
+      document.getElementById('gradeFilter').addEventListener('change', applyFilters);
+      document.getElementById('sectionFilter').addEventListener('change', applyFilters);
+      document.getElementById('sortOption').addEventListener('change', applyFilters);
+    });
+
+    async function fetchStudents() {
+      const res = await fetch(${ BASE_URL }.json);
+      students = await res.json() || {};
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const grade = document.getElementById('gradeFilter').value;
+      const section = document.getElementById('sectionFilter').value;
+      const sort = document.getElementById('sortOption').value;
+
+      filtered = Object.entries(students).map(([id, data]) => ({ id, ...data }));
+      filtered = filtered.filter(s =>
+        (!search || s.name.toLowerCase().includes(search) || s.grade.toLowerCase().includes(search)) &&
+        (!grade || s.grade === grade) &&
+        (!section || s.section === section)
+      );
+
+      if (sort === "name_asc") filtered.sort((a, b) => a.name.localeCompare(b.name));
+      if (sort === "name_desc") filtered.sort((a, b) => b.name.localeCompare(a.name));
+      if (sort === "score_asc") filtered.sort((a, b) => a.score - b.score);
+      if (sort === "score_desc") filtered.sort((a, b) => b.score - a.score);
+
+      currentPage = 1;
+      renderStudents();
+    }
+
+    function renderStudents() {
+      const table = document.getElementById('studentTable');
+      table.innerHTML = "";
+      const start = (currentPage - 1) * itemsPerPage;
+      const pageData = filtered.slice(start, start + itemsPerPage);
+      if (pageData.length === 0 && currentPage > 1) {
+        currentPage--;
+        renderStudents();
+        return;
+      }
+      for (const s of pageData) {
+        const row = `<tr>
+        <td>${s.name}</td><td>${s.age}</td><td>${s.grade}</td><td>${s.section}</td><td>${s.score}</td>
+        <td>
+          <button onclick="editStudent('${s.id}')">Edit</button>
+          <button onclick="deleteStudent('${s.id}')">Delete</button>
+        </td>
+      </tr>`;
+        table.innerHTML += row;
+      }
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const pages = Math.ceil(filtered.length / itemsPerPage);
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = "";
+      for (let i = 1; i <= pages; i++) {
+        pagination.innerHTML += <button class="${i === currentPage ? 'active-page' : ''}" onclick="gotoPage(${i})">${i}</button>;
+      }
+    }
+
+    function gotoPage(p) {
+      currentPage = p;
+      renderStudents();
+    }
+
+    function handleForm(e) {
+      e.preventDefault();
+      const id = document.getElementById('studentId').value;
+      const student = {
+        name: document.getElementById('name').value,
+        age: +document.getElementById('age').value,
+        grade: document.getElementById('grade').value,
+        section: document.getElementById('section').value,
+        score: +document.getElementById('score').value,
+      };
+      if (id) {
+        fetch(${ BASE_URL } / ${ id }.json, {
+          method: "PATCH",
+          body: JSON.stringify(student)
+        }).then(fetchStudents);
+      } else {
+        fetch(${ BASE_URL }.json, {
+          method: "POST",
+          body: JSON.stringify(student)
+        }).then(fetchStudents);
+      }
+      document.getElementById('studentForm').reset();
+      document.getElementById('formTitle').textContent = "Add Student";
+    }
+
+    function editStudent(id) {
+      const s = students[id];
+      document.getElementById('studentId').value = id;
+      document.getElementById('name').value = s.name;
+      document.getElementById('age').value = s.age;
+      document.getElementById('grade').value = s.grade;
+      document.getElementById('section').value = s.section;
+      document.getElementById('score').value = s.score;
+      document.getElementById('formTitle').textContent = "Edit Student";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function deleteStudent(id) {
+      if (confirm("Are you sure you want to delete this student?")) {
+        fetch(${ BASE_URL } / ${ id }.json, { method: "DELETE" }).then(fetchStudents);
+      }
+    }
+
+    function debounce(fn, delay) {
+      let timer;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+      };
+    }
+  </script>
+</body>
+
+</html>

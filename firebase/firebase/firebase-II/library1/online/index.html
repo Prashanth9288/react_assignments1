@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="main.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <h1>📚 Library Management System</h1>
+
+  <form id="book-form">
+    <input type="text" id="title" placeholder="Enter Title" required />
+    <input type="text" id="author" placeholder="Enter Author" required />
+    <input type="text" id="genre" placeholder="Enter Genre" required />
+    <input type="number" id="year" placeholder="Enter Year" required />
+    <select id="available">
+      <option value="Yes">Available</option>
+      <option value="No">Not Available</option>
+    </select>
+    <button type="submit">Add Book</button>
+  </form>
+
+  <hr />
+
+  <label>Search by Title:
+    <input type="text" id="search-title" placeholder="Type to search..." />
+  </label>
+
+  <div id="filters">
+    <label>Filter by Author:
+      <input type="text" id="filter-author" />
+    </label>
+    <label>Filter by Genre:
+      <input type="text" id="filter-genre" />
+    </label>
+    <label>Availability:
+      <select id="filter-availability">
+        <option value="All">All</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </label>
+    <button id="clear-filters">🧹 Clear All Filters</button>
+  </div>
+
+  <div id="sort-section">
+    <label>Sort By:
+      <select id="sort-by">
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="year">Year</option>
+      </select>
+    </label>
+    <label>Order:
+      <select id="sort-order">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="export-buttons">
+    <button id="export-csv">📥 Export to CSV</button>
+    <button id="export-pdf">📄 Export to PDF</button>
+  </div>
+
+  <h2>📖 Book List</h2>
+  <table border="1" id="book-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Year</th>
+        <th>Available</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="pagination-controls">
+    <button id="prev-page">⬅️ Prev</button>
+    <span id="page-info">Page 1 of 1</span>
+    <button id="next-page">Next ➡️</button>
+    <label>Books per page:
+      <select id="page-size">
+        <option value="5">5</option>
+        <option value="10">10</option>
+      </select>
+    </label>
+  </div>
+</body>
+
+</html>

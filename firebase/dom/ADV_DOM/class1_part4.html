@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<!-- <body>
+  <button id="changeTextBtn">Click Me</button>
+  <p id="textPara">I am a boring Text</p>
+
+
+</body> -->
+<!-- <script>
+  let button = document.getElementById('changeTextBtn')
+  let p = document.getElementById('textPara')
+
+  button.addEventListener("click", () => {
+    p.innerText = "I am a Intresting Text"
+  })
+</script> -->
+<!-- 
+<body>
+  <input type="text" id="inputBox">
+</body> -->
+
+<!-- <script>
+  let inputBox = document.getElementById("inputBox")
+  inputBox.addEventListener("keypress", (event) => {
+    console.log(event.key+" Key is pressed")
+  })
+</script> -->
+
+<!-- <body><button onclick="generateList()">Generate List</button> -->
+
+<ul id="list"></ul>
+
+<!-- </body> -->
+<!-- <script>
+  let items = ["Apple", "banana", "Grapes", "Mango"]
+
+  function generateList() {
+    let listContainer = document.getElementById("list");
+    listContainer.innerHTML = ""
+    items.forEach((ele) => {
+      let li = document.createElement("li");
+      // li.innerText = ele
+      listContainer.appendChild(li);
+    })
+  }
+</script> -->
+
+
+<body>
+  <input type="text" id="listInput" placeholder="type something...." oninput="updateText(event)">
+
+  <p id="dynamicP">Change my color, Type color name in above box </p>
+
+</body>
+
+</html>
+<!-- <script>
+  function updateText(event) {
+    console.log(event.target.value)
+    document.getElementById('dynamicP').innerText = event.target.value
+  }
+</script> -->
+
+
+<script>
+  function changeColor(event) {
+    color = event.target.value
+
+    document.getElementById('dynamicP').style.color = color
+  }
+</script>
+
+<!-- 
+1.Events
+2.AddeventListner
+3.Html event -onChange/onClick 
+-->

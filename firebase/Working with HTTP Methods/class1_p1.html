@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<input type="text" id="productinput" placeholder="Enter product Name">
+<button onclick="fetchProduct()">Search</button>
+<div id="productContainer"></div>
+
+<body>
+
+</body>
+<!-- <script>
+  let id = prompt("enter the UserId")
+  fetch("https://jsonplaceholder.typicode.com/posts/?userId=${id}")
+    .then((res) => (console.log(res)))
+    .then((data) => (console.log(data)))
+</script> -->
+
+<script>
+  async function fetchProduct() {
+    let searchQuery = document.getElementById('productinput').value.toLowerCase();
+
+    try {
+      let res = await fetch('https://fakestoreapi.com/products')
+      let products = await res.json();
+
+      let filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchQuery));
+
+      // console.log(filteredProducts)
+      let container = document.getElementById('productContainer')
+      container.innerHTML = "";
+
+      filteredProducts.forEach((product) => {
+        let productBox = document.createElement('div');
+        productBox.innerHTML = `
+        <h3>${product.title}</h3>
+        <p>${product.price}</p>`
+
+        container.appendChild(productBox)
+      })
+
+
+    } catch (error) {
+
+    }
+  }
+</script>
+<script>
+
+</script>
+
+</html>
+
+<!-- 1.get
+2.post
+3. patch
+4. delete
+ -->
+
+<!-- Base URL:https://jsonplaceholder.typicode.com
+
+ URL Based Paramerter:/posts
+
+ Query Based Parameter:?userId=1 -->

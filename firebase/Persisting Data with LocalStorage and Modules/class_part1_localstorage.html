@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <h2>Shopping List</h2>
+  <input type="text" id="itemInput" placeholder="Add product name here">
+  <button onclick="addProduct()">Add Product</button>
+  <ul id="list"></ul>
+</body> -->
+  <!-- <script>
+  function addProduct() {
+    let input = document.getElementById('itemInput')
+    let item = input.value
+    let ul = document.getElementById('list');
+    let li = document.createElement('li');
+    li.innerText = item;
+    ul.appendChild(li);
+
+  }
+
+</script> -->
+
+
+  <body>
+
+  </body>
+  <!-- <script>
+    let obj = {
+      "name": "tommy",
+      "hobbies": ["running", "drawing"]
+    }
+
+    localStorage.setItem("name", "Tommy")
+    localStorage.setItem("UserName", "Ramu")
+
+    console.log(localStorage.getItem("name"))
+    console.log(localStorage.getItem('UserName'))
+
+    localStorage.removeItem("age")
+
+  </script> -->
+
+  <script>
+    let obj = { name: "Tommy", age: 25 }
+
+    localStorage.setItem("userData", JSON.stringify(obj))
+  </script>
+
+</html>

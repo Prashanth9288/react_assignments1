@@ -44,6 +44,7 @@
   <input type="text" id="image" placeholder="image URL">
   <button onclick="addOrUpdateMovie()">Save Movie</button>
 
+  
   <h3>Movie List</h3>
   <div id="movieList"></div>
 
@@ -55,7 +56,7 @@
 <script>
 
   // Firebase URL(replace with your own if needed)
-  const firebaseURL = "https://movierulzdata-default-rtdb.asia-southeast1.firebasedatabase.app/movies"
+  const firebaseURL = "https://moviedatabase-fa5b8-default-rtdb.asia-southeast1.firebasedatabase.app/movies"
 
   //Fetch movies from Firebase
   async function fetchMovies() {
@@ -63,7 +64,7 @@
     let data = await res.json();
     if (!data) return [] // error handling
     // convert object to  array with id 
-    return Object.entries()(data).map(([id, movie]) => ({ id, ...movie }));
+    return Object.entries(data).map(([id, movie]) => ({ id, ...movie }));
   }
   // Display movies on the page 
   async function displayMovies() {
@@ -88,20 +89,20 @@
           `
       movieList.appendChild(movieCard)
     });
-    displayMovies()
+    //displayMovies()
   }
   // Delete movie from Firebase 
   async function deleteMovie(movieId) {
     await fetch(`${firebaseURL}/${movieId}.json`, {
       method: 'DELETE'
-    })
+    });
     displayMovies(); // Refresh list after delete 
   }
 
 
   // save new movie to Firebase
 
-  async function saveMovie() {
+  async function addOrUpdateMovie() {
     const title = document.getElementById('title').value;
     const year = document.getElementById('year').value;
     const genre = document.getElementById('genre').
@@ -130,11 +131,11 @@
   // Load movies on page load
 
   function editMovie(id, title, year, genre, image) {
-    document.getElementById('movieId').value = id
-    document.getElementById('title').value = title
-    document.getElementById('year').value = year
-    document.getElementById('genre').value = genre
-    document.getElementById('image').value = image
+    document.getElementById('movieId').value = id;
+    document.getElementById('title').value = title;
+    document.getElementById('year').value = year;
+    document.getElementById('genre').value = genre;
+    document.getElementById('image').value = image;
   }
   displayMovies()
 </script>

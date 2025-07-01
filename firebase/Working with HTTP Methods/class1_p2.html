@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // GET / POST / PATCH / DELETE
+
+  //POST
+
+  async function addPost() {
+    let response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "Tommy",
+        age: 20,
+      }),
+    });
+    let data = await response.json()
+    console.log(data)
+  }
+
+  addPost();
+
+
+
+
+</script>
+
+</html>
+
+<!-- 1.POST ==> Add / Sending new data
+2.PATCH ==> Update the existing data
+3.DELETE ==> Removes the data from database. -->

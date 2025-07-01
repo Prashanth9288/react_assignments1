@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="todoInput" placeholder="Enter your Task">
+
+  <button onclick="addTodo()">Add Todo</button>
+  <button onclick="clearAll()">Clear Todo's</button>
+
+  <ul id="todoList"></ul>
+</body>
+<!-- <script>
+  function addTodo() {
+    let todoInput = document.getElementById('todoInput').value;
+    let todoList = document.getElementById('todoList');
+
+    let li = document.createElement('li');
+    li.innerText = todoInput;
+
+    todoList.appendChild(li);
+  }
+  function clearAll() {
+    document.getElementById('todoList').innerHTML = ""
+  }
+</script> -->
+
+
+<script>
+  function addTodo() {
+    let todoInput = document.getElementById('todoInput').value
+
+    
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+    tasks.push(todoInput)
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    //console.log(tasks)
+  }
+
+
+</script>
+
+</html>
+
+<!-- 1.Take data from input tag.
+2. store it in localstorage.
+    i.check if any data is already present in local storage.
+    ii.If already data is there use it / else assign [] 
+    iii.push the new data again to localstorage.
+3. display the data 
+    i.fetch it first from local storage.
+    ii.map it on the ui.    
+    
+    -->

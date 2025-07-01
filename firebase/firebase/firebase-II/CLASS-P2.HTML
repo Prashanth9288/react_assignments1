@@ -44,6 +44,24 @@
   <input type="text" id="image" placeholder="image URL">
   <button onclick="addOrUpdateMovie()">Save Movie</button>
 
+  <h3>Filter & Sort Movies</h3>
+  <!--Filtering-->
+  <input type="number" id="filterYear" placeholder="FilterByYear">
+  <select id="filterGenre">
+    <option value="">All Genre</option>
+    <option value="SCIFI">SCI-FI</option>
+    <option value="Action">Action</option>
+    <option value="Horror">Horror</option>
+  </select>
+  <button onclick="applyFilterAndSorting()">Apply Filter</button>
+
+  <!--Sorting-->
+  <select id="sortBy">
+    <option value="year-asc">Year (Oldest First)</option>
+    <option value="year-desc">Year (Newest First)</option>
+  </select>
+  <button onclick="applyFilterAndSorting()"> Sort Movies</button>
+
   <h3>Movie List</h3>
   <div id="movieList"></div>
 
@@ -55,7 +73,7 @@
 <script>
 
   // Firebase URL(replace with your own if needed)
-  const firebaseURL = "https://movierulzdata-default-rtdb.asia-southeast1.firebasedatabase.app/movies"
+  const firebaseURL = "https://moviedatabase-fa5b8-default-rtdb.asia-southeast1.firebasedatabase.app/movies"
 
   //Fetch movies from Firebase
   async function fetchMovies() {
@@ -63,11 +81,35 @@
     let data = await res.json();
     if (!data) return [] // error handling
     // convert object to  array with id 
-    return Object.entries()(data).map(([id, movie]) => ({ id, ...movie }));
+    return Object.entries(data).map(([id, movie]) => ({ id, ...movie }));
   }
+
+  async function applyFilterAndSorting() {
+    let movies = await fetchMovies(); // fetched the data . 
+    let selectedYear = document.getElementById("filterYear").value;
+    let selectedGener = document.getElementById('filterGenre');
+    let sortBy = document.getElementById('sortBy').value;
+
+    let filteredMovies = movies.filter((movie) => {
+      return (
+        (selectedYear === "" || movie.year === selectedYear) &&
+        (selectedGener === "" || movie.genre === selectedGener)
+      )
+    });
+
+    console.log((2 > 3) || (3 > 2) && (4 > 5) || (5 > 6))
+
+    filteredMovies.sort((a, b) => {
+      if (sortBy === "year-asc") return a.year - b.year;
+
+      if (sortBy === "year-desc") return b.year - a.year;
+    })
+    displayMovies(filteredMovies)
+  }
+
+
   // Display movies on the page 
-  async function displayMovies() {
-    const movies = await fetchMovies();
+  async function displayMovies(movies) {
     const moviesList = document.getElementById('movieList');
     movieList.innerHTML = ""; // clear previous list
 
@@ -88,20 +130,20 @@
           `
       movieList.appendChild(movieCard)
     });
-    displayMovies()
+    //displayMovies()
   }
   // Delete movie from Firebase 
   async function deleteMovie(movieId) {
     await fetch(`${firebaseURL}/${movieId}.json`, {
       method: 'DELETE'
-    })
-    displayMovies(); // Refresh list after delete 
+    });
+    applyFilterAndSorting() // Refresh list after delete 
   }
 
 
   // save new movie to Firebase
 
-  async function saveMovie() {
+  async function addOrUpdateMovie() {
     const title = document.getElementById('title').value;
     const year = document.getElementById('year').value;
     const genre = document.getElementById('genre').
@@ -125,16 +167,19 @@
     document.getElementById('year').value = "";
     document.getElementById('genre').value = "";
     document.getElementById('image').value = "";
-    displayMovies();
+    applyFilterAndSorting()
   }
   // Load movies on page load
 
   function editMovie(id, title, year, genre, image) {
-    document.getElementById('movieId').value = id
-    document.getElementById('title').value = title
-    document.getElementById('year').value = year
-    document.getElementById('genre').value = genre
-    document.getElementById('image').value = image
+    document.getElementById('movieId').value = id;
+    document.getElementById('title').value = title;
+    document.getElementById('year').value = year;
+    document.getElementById('genre').value = genre;
+    document.getElementById('image').value = image;
   }
-  displayMovies()
+
+
+
+  applyFilterAndSorting()
 </script>

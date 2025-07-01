@@ -1,0 +1,93 @@
+InsightPulse – Real-Time Sales Feedback & Agent Performance Monitor
+Objective
+Build an internal tool for a Sales Ops Team to track customer feedback, monitor sales agent performance, and perform real-time analytics. The dashboard should sync data to Firebase Realtime DB, cache sessions in localStorage, and offer smart insights using JavaScript HOFs (map, filter, reduce, sort).
+
+Use-Case
+Sales agents collect structured feedback from clients post-demo. Team leads log in and track:
+
+Client satisfaction
+Agent-specific performance
+Department-wise impact
+Real-time anomalies or underperformance
+Features
+1. Dual Role Simulation: Agent vs Lead
+On page load, choose role:
+Agent (can only submit feedback)
+Lead (can view dashboard + analytics)
+Role must persist via localStorage and impact conditional rendering
+2. Feedback Submission Form (Agent Role)
+Fields:
+
+Agent Name
+Client Company
+Department (dropdown: SaaS, Hardware, Consulting, Other)
+Satisfaction Score (1–5)
+NPS (Net Promoter Score: -100 to +100)
+Comment
+Validations:
+
+Mandatory: Agent, Company, Score
+NPS must be between -100 to +100
+Behavior:
+
+On submit: Store to Firebase
+If offline: Store in localStorage and show “offline mode” banner
+3. Performance Dashboard (Lead Role)
+Render a data table with all feedback entries.
+
+Table Columns:
+| Agent   | Company   | Dept       | Score | NPS  | Comment           |
+|---------|-----------|------------|-------|------|-------------------|
+| Kiran   | FinEdge   | SaaS       | 5     | 80   | Loved the demo     |
+
+Conditional Row Coloring:
+
+Green if Score ≥ 4
+Yellow if 2 ≤ Score < 4
+Red if Score < 2 or NPS ≤ 0
+Sorting:
+
+By Score, NPS (toggle: asc/desc)
+Filtering:
+
+By Department and Agent
+Searching:
+
+By Company name or Agent name (debounced)
+4. Analytics Panel (with HOFs Only)
+Above the table, show:
+
+Total Feedback Entries
+Average Score (2 decimal places)
+Average NPS
+Department with Highest Avg Score
+Top-performing Agent(s) based on NPS
+Agents with ≥3 Low Scores (<3)
+All analytics must use only map, filter, reduce, sort. No loops.
+
+5. Data Persistence & Sync
+Agent form should auto-save data to localStorage if offline
+Lead role should include a Sync Now button to push local entries to Firebase
+Real-time updates reflected with Firebase listeners (onValue, etc.)
+6. UI/UX
+Tabs or toggles for switching between:
+Feedback Form
+Feedback Table
+Analytics
+Smart role-based rendering:
+If role === agent, hide dashboard
+If role === lead, hide submission form
+Use color-coded alerts & banners for sync status
+Firebase Data Format
+feedbacks: {
+  ""-Nx789fKJGHda"": {
+    agent: ""Kiran"",
+    company: ""FinEdge"",
+    department: ""SaaS"",
+    score: 5,
+    nps: 80,
+    comment: ""Loved the demo"",
+    timestamp: 1728381212
+  }
+}
+

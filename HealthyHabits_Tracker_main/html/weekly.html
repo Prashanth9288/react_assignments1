@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Dashboard</title>
+  <link rel="stylesheet" href="../css/weekly.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/firbase-config.js"></script>
+  <script type="module" src="../js/weekly.js" defer></script>
+</head>
+
+<body>
+  <main class="dashboard">
+    <h1>My Wellness Dashboard</h1>
+
+    <div class="wellness-card">
+      <h2>Wellness Score: <span id="wellness-score">--</span></h2>
+      <div id="score-indicator"></div>
+    </div>
+
+    <section class="summary-cards">
+      <div class="card">
+        <h3>Today's Completed</h3>
+        <p id="daily-progress">0/0</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Rate</h3>
+        <p id="weekly-rate">0%</p>
+      </div>
+      <div class="card">
+        <h3>Best Habit</h3>
+        <p id="best-habit">-</p>
+      </div>
+      <div class="card">
+        <h3>Needs Improvement</h3>
+        <p id="worst-habit">-</p>
+      </div>
+    </section>
+
+    <section class="charts">
+      <canvas id="weeklyChart"></canvas>
+      <canvas id="categoryPieChart"></canvas>
+    </section>
+
+    <div id="reminder-toast" class="toast">⏰ Reminder: Stay on track!</div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+
+</body>
+
+</html>

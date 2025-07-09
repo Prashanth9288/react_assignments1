@@ -1,0 +1,158 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 50px;
+}
+
+/* Form Container */
+form#habit-form {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  max-width: 400px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  transition: transform 0.3s ease;
+}
+
+form h2 {
+  color: #222;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Input and Select Fields */
+input,
+select,
+button {
+  width: 100%;
+  padding: 12px 40px 12px 35px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Focus effect */
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(129, 212, 250, 0.7);
+  background-color: #ffffff;
+  transform: scale(1.01);
+}
+
+/* Placeholder */
+input::placeholder {
+  color: #444;
+}
+
+/* Add Icon Images */
+#name {
+  background-image: url('https://img.icons8.com/ios/50/000000/user.png');
+}
+
+#goal {
+  background-image: url('https://img.icons8.com/ios/50/goal.png');
+}
+
+input,
+select {
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 18px;
+}
+
+/* Gradient Button */
+button[type="submit"] {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.03);
+  background: linear-gradient(to right, #0072ff, #00c6ff);
+}
+
+/* Toast Notification */
+#toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  display: none;
+  font-size: 15px;
+  z-index: 999;
+  animation: slideUp 0.4s ease;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.footer .social-icons {
+  margin-top: 10px;
+}
+
+.footer .social-icons a {
+  color: #333;
+  margin: 0 10px;
+  font-size: 1.2rem;
+  transition: 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+  color: #0072ff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  form#habit-form {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+/* Toast Animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

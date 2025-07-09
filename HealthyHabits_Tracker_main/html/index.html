@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Habits Tracker</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <header class="navbar fade-in">
+    <div class="logo">
+      <i class="fas fa-heartbeat"></i>
+      <span>Healthy Habits</span>
+    </div>
+    <nav>
+      <a href="../html/login.html" class="active">Login</a>
+      <a href="../html/signup.html">Sign up</a>
+    </nav>
+  </header>
+
+  <main class="hero-container fade-in-delay">
+    <div class="hero-content">
+      <div class="text-content slide-in-left">
+        <div class="glass-card">
+          Build <span>Healthy</span> Habits
+        </div>
+        <p class="glass-card">Your personal assistant. Make small habits and big goals achievable.</p>
+        <a href="login.html" class="start-btn pulse">Start</a>
+      </div>
+      
+    </div>
+  </main>
+
+
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Habits Tracker</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+    <div class="auth-container" id="auth-container">
+        <h1 id="auth-header">Log In</h1>
+        <form id="authForm">
+            <input type="email" id="auth-email" placeholder="Enter email" required>
+            <input type="password" id="auth-password" placeholder="Enter password" required>
+            <button type="button" id="auth-btn">Login</button>
+            <p id="auth-message"></p>
+        </form>
+
+        <p class="auth-toggle" id="toggle-action">Don't have an account? Sign Up</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB77PbPjOUxaa96SpPT2mMRS8axSTuFxBg",
+            authDomain: "healthhabit-4047b.firebaseapp.com",
+            projectId: "healthhabit-4047b",
+            storageBucket: "healthhabit-4047b.firebasestorage.app",
+            messagingSenderId: "337988168063",
+            appId: "1:337988168063:web:9a808145701c449acb924a",
+            measurementId: "G-35SF8Q4FT3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        let isSignup = false;
+
+        const authBtn = document.getElementById("auth-btn");
+        const authEmail = document.getElementById("auth-email");
+        const authPassword = document.getElementById("auth-password");
+        const authMessage = document.getElementById("auth-message");
+        const authContainer = document.getElementById("auth-container");
+        const toggleAction = document.getElementById("toggle-action");
+        const authHeader = document.getElementById("auth-header");
+
+        document.getElementById("toggle-action").addEventListener("click", () => {
+            isSignup = !isSignup;
+            if (isSignup) {
+                authHeader.innerText = "Sign Up";
+                authBtn.innerText = "Sign Up";
+                toggleAction.innerText = "Already have an account? Log In";
+            } else {
+                authHeader.innerText = "Log In";
+                authBtn.innerText = "Login";
+                toggleAction.innerText = "Don't have an account? Sign Up";
+            }
+        });
+
+        authBtn.addEventListener("click", () => {
+            const email = authEmail.value;
+            const password = authPassword.value;
+
+            if (isSignup) {
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        authMessage.innerText = "Sign Up successful!";
+                    })
+                    .catch((error) => {
+                        authMessage.innerText = error.message;
+                    });
+            } else {
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        authMessage.innerText = "Login successful!";
+
+                        // Redirect to Dashboard after successful login
+                        window.location.href = 'dashboard.html'; // This will redirect the user to the dashboard page
+                    })
+                    .catch((error) => {
+                        authMessage.innerText = error.message;
+                    });
+            }
+        });
+
+
+        document.getElementById("logout-btn").addEventListener("click", () => {
+            signOut(auth).then(() => {
+                alert("Logout successful!");
+
+                // Clear the email and password fields after logout
+                document.getElementById("auth-email").value = "";
+                document.getElementById("auth-password").value = "";
+                document.getElementById("auth-message").innerText = "";
+
+                // Redirect to the login page after logout
+                window.location.href = 'login.html'; // Ensure this matches your login page file name
+            }).catch((error) => {
+                alert("Logout failed!");
+                // console.error("Logout error:", error);
+            });
+        });
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("user-email").innerText = user.email;
+                authContainer.classList.add("hidden");
+                document.getElementById("logout-container").classList.remove("hidden");
+            } else {
+                authContainer.classList.remove("hidden");
+                document.getElementById("logout-container").classList.add("hidden");
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>

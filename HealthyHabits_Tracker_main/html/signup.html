@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthy Habits Tracker - Login</title>
+  <link rel="stylesheet" href="../css/signup.css" />
+</head>
+
+<body>
+  <div class="auth-container" id="auth-container">
+    <h1 id="auth-header">Log In</h1>
+    <form id="authForm">
+      <input type="email" id="auth-email" placeholder="Enter email" required />
+      <input type="password" id="auth-password" placeholder="Enter password" required />
+      <button type="button" id="auth-btn">Login</button>
+      <p id="auth-message" style="color: red;"></p>
+    </form>
+
+    <p class="auth-toggle" id="toggle-action">Don't have an account? Sign Up</p>
+  </div>
+  <script type="module" src="../js/firbase-config.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+  <script type="module">
+    // ✅ Firebase import modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+    // ✅ Correct Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyB77PbPjOUxaa96SpPT2mMRS8axSTuFxBg",
+      authDomain: "healthhabit-4047b.firebaseapp.com",
+      projectId: "healthhabit-4047b",
+      storageBucket: "healthhabit-4047b.firebasestorage.app",
+      messagingSenderId: "337988168063",
+      appId: "1:337988168063:web:9a808145701c449acb924a",
+      measurementId: "G-35SF8Q4FT3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    // ✅ Form Elements
+    const authBtn = document.getElementById("auth-btn");
+    const authEmail = document.getElementById("auth-email");
+    const authPassword = document.getElementById("auth-password");
+    const authMessage = document.getElementById("auth-message");
+    const authHeader = document.getElementById("auth-header");
+    const toggleAction = document.getElementById("toggle-action");
+
+    let isSignup = false;
+
+    // ✅ Toggle between login/signup
+    toggleAction.addEventListener("click", () => {
+      isSignup = !isSignup;
+      authHeader.innerText = isSignup ? "Sign Up" : "Log In";
+      authBtn.innerText = isSignup ? "Sign Up" : "Login";
+      toggleAction.innerText = isSignup
+        ? "Already have an account? Log In"
+        : "Don't have an account? Sign Up";
+      authMessage.innerText = "";
+    });
+
+    // ✅ Handle Login or Signup
+    authBtn.addEventListener("click", () => {
+      const email = authEmail.value.trim();
+      const password = authPassword.value.trim();
+
+      if (!email || !password) {
+        authMessage.innerText = "Please enter both email and password.";
+        return;
+      }
+
+      if (isSignup) {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            authMessage.style.color = "green";
+            authMessage.innerText = "Sign Up successful! Redirecting...";
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 1000);
+          })
+          .catch((error) => {
+            authMessage.innerText = error.message;
+          });
+      } else {
+        signInWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            authMessage.style.color = "green";
+            authMessage.innerText = "Login successful! Redirecting...";
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 1000);
+          })
+          .catch((error) => {
+            authMessage.innerText = error.message;
+          });
+      }
+    });
+
+    // ✅ Monitor user login state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User is logged in:", user.email);
+      } else {
+        console.log("User is logged out");
+      }
+    });
+  </script>
+</body>
+
+</html>

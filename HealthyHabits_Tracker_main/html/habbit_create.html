@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Create Habit • Healthy Habits Tracker</title>
+  <link rel="stylesheet" href="../css/habbit_create.css">
+  <script type="module" src="../js/inject.js"></script>
+</head>
+
+<body>
+  <form id="habit-form">
+    <h2>Create New Habit</h2>
+    <input type="text" id="name" placeholder="Habit name" required>
+    <select id="category">
+      <option value="Hydration">Hydration</option>
+      <option value="Fitness">Fitness</option>
+      <option value="Sleep">Sleep</option>
+      <option value="Meditation">Meditation</option>
+      <option value="Mental Health">Mental Health</option>
+      <option value="Productivity">Productivity</option>
+    </select>
+
+    <input type="number" id="goal" placeholder="Goal (e.g., 8 glasses)" required>
+    <select id="goalType">
+      <option>daily</option>
+      <option>weekly</option>
+    </select>
+    <button type="submit">✅ Add Habit</button>
+  </form>
+
+  <!-- Toast container -->
+  <div id="toast"></div>
+  <script type="module" src="../js/createhabit.js"></script>
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthy Habits Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="../js/dashboard.js" defer></script>
+  <script type="module" src="../js/"></script>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">💚 Healthy Habits</div>
+      <ul>
+        <li><a href="goals.html">🎯 Goals</a></li>
+        <li><a href="habbit_create.html">➕ Create Habit</a></li>
+        <li><a href="Habbit_progress.html">📈 Habit Progress</a></li>
+        <li><a href="weekly.html">📅 Weekly</a></li>
+        <li><button id="dark-mode-toggle">🌙 Dark Mode</button></li>
+        <li><button onclick="location.href='index.html'" class="logout-btn">Logout</button></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard">
+      <header class="top-header">
+        <h1>Welcome Back 👋</h1>
+        <p>Track your progress & shape your future better!</p>
+      </header>
+
+      <section class="mood-section">
+        <h2>How are you feeling today?</h2>
+        <div class="moods-container">
+          <div class="mood-option" data-msg="Excellent vibes! 🌟">😄<span>Excellent</span></div>
+          <div class="mood-option" data-msg="Feeling good—keep the momentum going! 👍">😊<span>Good</span></div>
+          <div class="mood-option" data-msg="Neutral day? Take things one step at a time.">😐<span>Neutral</span></div>
+          <div class="mood-option" data-msg="Tough day—you're doing better than you think! 💪">😥<span>Poor</span></div>
+          <div class="mood-option" data-msg="Bad day—tomorrow is a fresh start. 🌱">😢<span>Terrible</span></div>
+        </div>
+        <p id="mood-message" class="mood-message"></p>
+      </section>
+
+
+      <!-- Cards Section -->
+      <section class="cards-grid">
+        <div class="card" id="bmi-summary"></div>
+        <div class="card tracker-card">
+          <h3>💧 Hydration</h3>
+          <p>Drink at least 8 glasses today!</p>
+        </div>
+        <div class="card tracker-card">
+          <h3>🏃 Exercise</h3>
+          <p>Target 30 mins of movement daily.</p>
+        </div>
+        <div class="card tracker-card">
+          <h3>🛌 Sleep</h3>
+          <p>Minimum 7 hours for recovery.</p>
+        </div>
+      </section>
+      <!-- Habits List Section -->
+      <section class="habits-section">
+        <h2>Your Habits</h2>
+        <ul id="habitsDisplay" class="habit-list"></ul>
+      </section>
+    </main>
+
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+
+</body>
+
+</html>

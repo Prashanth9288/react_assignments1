@@ -1,0 +1,160 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #f8d7e3, #d1eaf7);
+  color: #333;
+  padding: 20px;
+}
+
+main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#habit-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.habit-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.habit-card .habit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.habit-card .tag {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.Mindfulness .tag {
+  background: #a259ff;
+}
+
+.Hydration .tag {
+  background: #00c6ff;
+}
+
+.Fitness .tag {
+  background: #ff7b00;
+}
+
+.Sleep .tag {
+  background: #00a86b;
+}
+
+input[type="number"] {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+button {
+  background: linear-gradient(to right, #00c6ff, #bc00dd);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(to right, #00b4ff, #a000cc);
+}
+
+/* .progress-bar-container {
+  background: #e0e0e0;
+  border-radius: 6px;
+  height: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 5px;
+} */
+
+.progress-bar {
+  /* height: 100%; */
+  background: linear-gradient(to right, #00c6ff, #ff0000);
+  text-align: center;
+  height: 24px;
+  /* font-size: 12px; */
+  color: white;
+  /* transition: width 0.3s ease; */
+  /* font-weight: bold; */
+  margin: 10px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.progress {
+  background-color: #4caf50;
+  height: 100%;
+  color: white;
+  text-align: center;
+  line-height: 24px;
+  transition: width 0.3s ease;
+}
+
+
+.completed-badge {
+  background: #4caf50;
+  color: white;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  align-self: flex-end;
+  font-weight: bold;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00c6ff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 3s ease-in-out;
+  z-index: 999;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Health Goals</title>
+  <link rel="stylesheet" href="../css/goals.css" />
+  <script type="module" src="../js/firbase-config.js"></script>
+  <script type="module" src="../js/goals.js" defer></script>
+</head>
+
+<body>
+  <main class="bmi-container">
+    <h1>🎯 Calculate Your BMI</h1>
+    <form id="bmi-form">
+      <label>Height</label>
+      <div class="input-group">
+        <input type="number" id="feet" placeholder="Feet" required />
+        <input type="number" id="inches" placeholder="Inches" required />
+      </div>
+
+      <label>Weight (kg)</label>
+      <input type="number" id="weight" placeholder="e.g. 70" required />
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div id="bmi-result" class="bmi-output"></div>
+    <div id="goals-list" class="goals-box"></div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('./footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+
+</body>
+
+</html>

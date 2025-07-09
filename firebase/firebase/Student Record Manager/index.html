@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=
+  , initial-scale=1.0">
+  <title>Student Record Manager</title>
+
+  <style>
+    body{
+      font-family: Arial,sans-serif;
+      background-color: #f4f4f4;
+      padding:20px;
+    }
+    h1{
+      text-align: center;
+    }
+
+    form{
+      background-color: white;
+      padding:15px;
+      margin:20px auto;
+      width:300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    form input,form button{
+      display: block;
+      width: 90%;
+      padding: 8px;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 20px;
+    }
+
+    th,td{
+      border:1px solid #ccc;
+      padding:10px;
+      text-align: center;
+    }
+    thead{
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+    <h1>Student Record Manager</h1>
+
+  <form >
+    <input type="text" id="name" placeholder="Enter name"><br/>
+    <input type="text"  id="batch" placeholder="Enter batch no"><br/>
+    <input type="text" id="age" placeholder="Enter Age"><br/>
+    <input type="number" id="score" placeholder="Enter score"><br/>
+    <button type="submit">Submit</button>
+  </form>
+<input type="text" id="search" placeholder="search by name...."/>
+
+<button id="sort-age">Sort by Age ↑ </button>
+<button id="sort-score">Sort by Score ↓</button>
+
+<div id="stats">
+  <p>Total Students: <span id="total">0</span></p>
+  <p>Average Score: <span id="average">0</span></p>
+</div>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Batch</th>
+        <th>Age</th>
+        <th>Score</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="student-body"> </tbody>
+
+  
+  </table>
+
+
+  <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "books": {
+    "book1": {
+      "title": "Atomic Habits",
+      "author": "James Clear"
+    },
+    "book2": {
+      "title": "The Alchemist",
+      "author": "Paulo Coelho"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Record Manager</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎓 Student Record Manager</h1>
+
+    <!-- Form -->
+    <form id="student-form">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="text" id="batch" placeholder="Batch" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <input type="number" id="score" placeholder="Score (0-100)" required />
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Stats -->
+    <div id="stats">
+      <p>Total Students: <span id="total">0</span></p>
+      <p>Average Score: <span id="average">0</span></p>
+    </div>
+
+    <!-- Search and Sort -->
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search by name..." />
+      <button id="sort-age">Sort by Age ↑</button>
+      <button id="sort-score">Sort by Score ↓</button>
+    </div>
+
+    <!-- Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Batch</th>
+          <th>Age</th>
+          <th>Score</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="student-body">
+        <!-- Rows go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

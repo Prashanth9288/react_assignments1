@@ -1,0 +1,29 @@
+body{
+  font-family: sans-serif;
+  padding:20px;
+  background-color: #f0f0f0;
+}
+
+#characters{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.character-card{
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.character-card.alive{
+  border: 2px solid green;
+}
+
+.character-card img{
+  width: 100%;
+  border-radius: 10px;
+}

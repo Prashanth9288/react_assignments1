@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <input type="text" id="searchBox" placeholder="Type something"> -->
+
+
+  <!-- <script> -->
+    <!-- function debounce(func,delay){
+      let timeoutId;
+
+      return function(...args){
+        clearTimeout(timeoutId);
+        timeoutId=setTimeout(()=>{
+          func.apply(this,args)
+        },delay)
+      };
+    }
+
+    function timeoutId(event){
+      console.log("Searching for",event.target.value);
+    }
+
+    const debouncedSearch=debounce(handleSearch,500);
+
+    document.getElementById("searchBox").addEventListener("input",debouncedSearch)
+  </script> -->
+
+<!-- <input type="text" id="searchBox" placeholder="Type something..." /> -->
+<!-- <script>
+  // Step 1: Define the debounce function
+function debounce(func, delay) {
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId); // cancel the previous call if it's still waiting
+    timeoutId = setTimeout(() => {
+      func.apply(this, args); // call the function after waiting
+    }, delay);
+  };
+}
+
+// Step 2: Create the function to call after user stops typing
+function handleSearch(event) {
+  console.log("Searching for:", event.target.value);
+}
+
+// Step 3: Wrap it with debounce
+const debouncedSearch = debounce(handleSearch, 500);
+
+// Step 4: Add event listener to input
+document.getElementById("searchBox").addEventListener("input", debouncedSearch);
+
+</script> -->
+
+<script>
+  // Step 1: Define the throttle function
+function throttle(func, limit) {
+  let lastCall = 0;
+
+  return function (...args) {
+    const now = Date.now();
+
+    if (now - lastCall >= limit) {
+      lastCall = now;
+      func.apply(this, args); // call if allowed
+    }
+  };
+}
+
+// Step 2: Create a function to run on scroll
+function logScroll() {
+  console.log("Scrolled to:", window.scrollY);
+}
+
+// Step 3: Wrap it with throttle
+const throttledScroll = throttle(logScroll, 1000); // max 1 call/sec
+
+// Step 4: Add event listener
+window.addEventListener("scroll", throttledScroll);
+
+</script>
+
+
+</body>
+</html>

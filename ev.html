@@ -1,0 +1,287 @@
+<!--Problem-2 : Filtering and Summing Orders
+
+An e-commerce platform has an order list where amounts are stored as strings (some with currency symbols). Your task is to:
+
+Convert the order amounts to numbers (ignore currency symbols).
+
+Filter out any orders below 100.
+
+Sum the remaining order amounts.
+
+Input:
+
+
+const orders = ["$120", " 75 ", "â‚¹200", "â‚¬50", " 300", "150"];
+
+
+
+Expected Output:
+
+
+770 // (120 + 200 + 300 + 150)
+
+
+
+Problem Statement: PokÃ©mon Explorer Dashboard
+
+Objective:
+
+Create an interactive web application to explore PokÃ©mon data using the PokeAPI (https://pokeapi.co/api/v2/pokemon), with advanced search, filtering, and exploration features.
+
+API Endpoint:
+
+https://pokeapi.co/api/v2/pokemon
+
+Requirements:
+
+1. PokÃ©mon Display
+
+On page load, display the first 20-30 PokÃ©mon
+
+For each PokÃ©mon, show:
+
+PokÃ©mon name
+
+Sprite/image
+
+Types
+
+Base experience
+
+Unique PokÃ©mon ID
+
+2. Advanced Search Feature (with Debounce)
+
+Implement a search input allowing users to search PokÃ©mon by:
+
+Name
+
+PokÃ©mon type
+
+Unique ID
+
+Use manual debounce implementation (500ms delay)
+
+Search should be case-insensitive
+
+3. Filtering Capabilities
+
+Create dropdown/checkbox filters for:
+
+PokÃ©mon Types (multi-select)
+
+Fire
+
+Water
+
+Grass
+
+Electric
+
+etc.
+
+Sort by:
+
+PokÃ©mon ID (ascending/descending)
+
+Base experience
+
+Alphabetical order
+
+4. Pagination
+
+Display 20 PokÃ©mon per page
+
+Implement "Previous" and "Next" navigation buttons
+
+Show current page number
+
+Example User Flow:
+
+User opens website â†’ First 20 PokÃ©mon appear
+
+User types "Pika" in search â†’ Filtered results appear after 500ms
+
+User selects "Electric" type â†’ Electric PokÃ©mon show
+
+User clicks "Next" â†’ Next page of PokÃ©mon loads
+
+User clicks on a PokÃ©mon â†’ Detailed view appears
+
+Submission Guidelines:
+
+Submit GitHub repository link
+
+Include README with setup instructions-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Explorer Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, select {
+      margin: 10px 5px;
+      padding: 5px;
+    }
+    .pokemon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .pokemon-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      width: 150px;
+      text-align: center;
+    }
+    .pagination {
+      margin-top: 20px;
+    }
+    .type-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pokémon Explorer</h1>
+
+  <input type="text" id="search" placeholder="Search by name, type, or ID" />
+  <select id="sort">
+    <option value="id-asc">ID ↑</option>
+    <option value="id-desc">ID ↓</option>
+    <option value="name">Name A-Z</option>
+    <option value="exp">Base Exp</option>
+  </select>
+
+  <div class="type-filters">
+    <label><input type="checkbox" value="fire"> Fire</label>
+    <label><input type="checkbox" value="water"> Water</label>
+    <label><input type="checkbox" value="grass"> Grass</label>
+    <label><input type="checkbox" value="electric"> Electric</label>
+    <label><input type="checkbox" value="bug"> Bug</label>
+    <label><input type="checkbox" value="flying"> Flying</label>
+    <label><input type="checkbox" value="normal"> Normal</label>
+    <label><input type="checkbox" value="poison"> Poison</label>
+    <label><input type="checkbox" value="ground"> Ground</label>
+  </div>
+
+  <div class="pokemon-grid" id="pokemon-list"></div>
+
+  <div class="pagination">
+    <button id="prev">Previous</button>
+    <span id="page">Page 1</span>
+    <button id="next">Next</button>
+  </div>
+
+  <script>
+    const apiURL = "https://pokeapi.co/api/v2/pokemon";
+    const listEl = document.getElementById("pokemon-list");
+    const searchEl = document.getElementById("search");
+    const sortEl = document.getElementById("sort");
+    const pageEl = document.getElementById("page");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const typeFilters = document.querySelectorAll('.type-filters input');
+
+    let currentPage = 1;
+    let allPokemon = [];
+    let displayedPokemon = [];
+    let debounceTimer;
+
+    async function fetchPokemons(page = 1) {
+      listEl.innerHTML = "Loading...";
+      const offset = (page - 1) * 20;
+      const res = await fetch(${apiURL}?limit=20&offset=${offset});
+      const data = await res.json();
+
+      const detailedPromises = data.results.map(p =>
+        fetch(p.url).then(res => res.json())
+      );
+      allPokemon = await Promise.all(detailedPromises);
+      applyFilters();
+    }
+
+    function displayPokemons(list) {
+      listEl.innerHTML = "";
+      list.forEach(poke => {
+        const div = document.createElement("div");
+        div.className = "pokemon-card";
+        div.innerHTML = `
+          <h3>${poke.name}</h3>
+          <img src="${poke.sprites.front_default}" alt="${poke.name}" />
+          <p>ID: ${poke.id}</p>
+          <p>Types: ${poke.types.map(t => t.type.name).join(", ")}</p>
+          <p>Base Exp: ${poke.base_experience}</p>
+        `;
+        listEl.appendChild(div);
+      });
+    }
+
+    function applyFilters() {
+      const query = searchEl.value.trim().toLowerCase();
+      const selectedTypes = [...typeFilters].filter(cb => cb.checked).map(cb => cb.value);
+
+      displayedPokemon = allPokemon.filter(p => {
+        const nameMatch = p.name.toLowerCase().includes(query);
+        const idMatch = p.id.toString() === query;
+        const typeMatch = p.types.some(t => t.type.name.toLowerCase().includes(query));
+        const matchesSearch = !query || nameMatch || idMatch || typeMatch;
+
+        const matchesType = selectedTypes.length === 0 || p.types.some(t => selectedTypes.includes(t.type.name));
+        return matchesSearch && matchesType;
+      });
+
+      sortPokemon();
+    }
+
+    function sortPokemon() {
+      const sort = sortEl.value;
+      if (sort === "id-asc") {
+        displayedPokemon.sort((a, b) => a.id - b.id);
+      } else if (sort === "id-desc") {
+        displayedPokemon.sort((a, b) => b.id - a.id);
+      } else if (sort === "name") {
+        displayedPokemon.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sort === "exp") {
+        displayedPokemon.sort((a, b) => b.base_experience - a.base_experience);
+      }
+      displayPokemons(displayedPokemon);
+    }
+
+    searchEl.addEventListener("input", () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => applyFilters(), 500);
+    });
+
+    sortEl.addEventListener("change", sortPokemon);
+
+    typeFilters.forEach(cb => cb.addEventListener("change", applyFilters));
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        pageEl.textContent = Page ${currentPage};
+        fetchPokemons(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentPage++;
+      pageEl.textContent = Page ${currentPage};
+      fetchPokemons(currentPage);
+    });
+
+    fetchPokemons(currentPage);
+  </script>
+</body>
+</html>

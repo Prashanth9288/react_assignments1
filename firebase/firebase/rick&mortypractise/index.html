@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<title>Rick a & Morty Explorer</title>
+<link rel="stylesheet" href="./style.css">
+<body>
+  
+<h1>Rick & Morty Explorer</h1>
+<!-- //Search -->
+<div id="search-box">
+  <input type="text" id="search-input" placeholder="Search characters by name"/>
+  <button onclick="searchCharacters()">Search</button>
+</div>
+
+<!-- filter control -->
+ <div id="filters">
+  <label>Status</label>
+  <select id="status-filter">
+    <option value="">All</option>
+    <option value="Alive">Alive</option>
+    <option value="Dead">Dead</option>
+    <option value="unknown">unknown</option>
+  </select>
+  
+  <label >Species:</label>
+  <select  id="species-filter">
+    <option value="">All</option>
+    <option value="Human">Human</option>
+    <option value="Alein">Alien</option>
+  </select>
+
+  <button onclick="applyFilters()">Apply Filters</button>
+ </div>
+
+  <div id="characters"></div>
+
+<div id="pagination">
+  <button id="prev-btn" onclick="changePage(-1)">Previous</button>
+  <span id="page-label">Page 1</span>
+  <button id="next-btn" onclick="changePage(1)">Next</button>
+</div>
+
+
+
+  <script src="./app.js"></script>
+</body>
+</html>

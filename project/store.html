@@ -1,0 +1,25 @@
+<!-- store.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vendor Store</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <section id="storeHeader" class="store-header"></section>
+
+  <!-- Product Filters -->
+  <section>
+    <h2>Products</h2>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="new">🆕 New Arrivals</button>
+      <button class="filter-tab" data-filter="sale">💸 On Sale</button>
+      <button class="filter-tab" data-filter="clearance">🏷️ Clearance</button>
+    </div>
+    <div id="productGrid" class="product-grid"></div>
+  </section>
+
+  <script type="module" src="./js/store.js"></script>
+</body>
+</html>

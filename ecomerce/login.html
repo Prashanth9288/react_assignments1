@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - E-shoppy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Fullscreen background video */
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    /* Centered login form */
+    .login-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4a90e2;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #25045d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #c4adff;
+      color: #25045d
+    }
+    p{
+      color: #ffffff;
+      float: right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    a{
+      padding: 10px;
+      background-color: #4a90e2;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #0d0123;
+    }
+    #home-btn{
+      background-color: #4a90e2;
+      width: 20%;
+      margin-top: 10px;
+    }
+    #home-btn:hover{
+      background-color: #e6cbff;
+    }
+     a:hover{
+      background-color: #e6cbff;
+    }
+    #login-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fullscreen background video -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="./images/loginpage.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <h2>Welcome to E-Shoppy</h2>
+    <input type="email" id="login-email" placeholder="Enter Email" />
+    <input type="password" id="login-password" placeholder="Enter Password" />
+    <button id="login-btn">Login</button>
+    <p>Don't have account then ? <a href="register.html"> Register</a></p>
+    <button id="home-btn" onclick="home()">Home</button>
+    <p id="login-message"></p>
+  </div>
+
+  <!-- Firebase Auth Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+    } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+    import {
+      getDatabase,
+      ref,
+      get
+    } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDqfJUI0Orck3nDCB2Ulm-AgiZcWV92KcM",
+      authDomain: "democheck-c2d99.firebaseapp.com",
+      databaseURL: "https://democheck-c2d99-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "democheck-c2d99",
+      storageBucket: "democheck-c2d99.appspot.com",
+      messagingSenderId: "870409634136",
+      appId: "1:870409634136:web:68bad3814e92012d7ae52d",
+      measurementId: "G-KB6RD571R1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    document.getElementById("login-btn").addEventListener("click", async () => {
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const msg = document.getElementById("login-message");
+      msg.innerText = "";
+
+      if (!email || !password) {
+        msg.innerText = "Please enter both email and password.";
+        return;
+      }
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const uid = userCredential.user.uid;
+        const snapshot = await get(ref(db, 'users/' + uid));
+
+        if (!snapshot.exists()) {
+          msg.innerText = "User data not found.";
+          return;
+        }
+
+        const role = snapshot.val().role;
+        sessionStorage.setItem("uid", uid);
+        sessionStorage.setItem("role", role);
+
+        if (role === "seller") {
+          window.location.href = "seller_dashboard.html";
+        } else if (role === "buyer") {
+          window.location.href = "User_dashboard.html";
+        } else {
+          msg.innerText = "Unknown user role!";
+        }
+
+      } catch (err) {
+        console.error(err);
+        msg.innerText = "Incorrect email or password!";
+      }
+    });
+  </script>
+</body>
+</html>
+
+<script>
+  function register() {
+    window.location.href = "register.html";
+  }
+
+  function home() {
+    window.location.href = "index.html";
+  }
+</script>

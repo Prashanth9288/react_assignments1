@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #logo video {
+            height: 80px;
+        }
+
+        #logout-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        #logout-container button {
+            margin-right: 5%;
+        }
+
+        #logout-container h3,
+        h1 {
+            margin-left: 15%;
+        }
+
+        #container {
+            display: flex;
+            margin-top: 120px;
+        }
+
+        #nav_bar {
+            background-color: rgb(23, 0, 65);
+            width: 220px;
+            height: 100vh;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            padding-top: 60px;
+        }
+
+        #nav_bar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #nav_bar ul li {
+            background-color: #be9ef9;
+            margin: 20px;
+            padding: 12px;
+            color: rgb(5, 3, 3);
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #nav_bar ul li:hover {
+            background-color: #ffffff;
+            border: 1px solid #0dff00;
+        }
+
+        #main-content {
+            margin: 10px 0 0 240px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        #dashboard-section {
+            background-color: #ccc;
+            padding: 20px;
+            margin: auto;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            list-style-type: none;
+            margin-top: 10px;
+        }
+
+        input {
+            padding: 5px;
+            border: none;
+            box-shadow: rgba(100, 100, 111, 0.9) 0px 7px 29px 0px;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            border: none;
+            box-shadow: rgba(100, 100, 111, 0.9) 0px 7px 29px 0px;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #productList {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .productCard {
+            background-color: rgb(209, 209, 209);
+            border: 1px solid black;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .productCard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .productCard img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .productCard h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .productCard .description {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .productCard .ratings {
+            font-size: 14px;
+            color: #f39c12;
+            background-color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .productCard .comments {
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .productCard .comments p {
+            margin: 4px 0;
+            padding-left: 10px;
+            border-left: 2px solid #ffffff;
+        }
+
+        .productCard p.price {
+            color: #000000;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .edit-btn {
+            background-color: #13014b;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .cancle-btn {
+            display: none;
+        }
+
+        #order-section {
+            background-color: #ffffff;
+            padding: 10px;
+        }
+
+        #order-section img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background-color: #f2f2f2;
+        }
+
+        #sellerOrderList {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 10px;
+            margin: 10px;
+            gap: 10px;
+            width: 20%;
+        }
+
+        #sellerOrderList h3 {
+            background-color: rgb(27, 2, 78);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .order-status-grid {
+            background-color: #ffffff;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 15px;
+        }
+
+        .order-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #c6c6c6;
+            border: 1px solid black;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .order-card:hover {
+            background-color: #be9ef9;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        select {
+            background-color: #0f0144;
+            padding: 8px;
+            font-weight: bold;
+            color: #ddd;
+            float: right;
+        }
+
+        select:hover {
+            background-color: #030007;
+        }
+
+        .address,
+        .payment-details {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .address h4,
+        .payment-details h4 {
+            background-color: #110030;
+            padding: 5px;
+            color: #ddd;
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 1200px) {
+            #productList {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            #dashboard-section {
+                width: 70%;
+            }
+
+            #logout-container {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            #logout-container h1 {
+                font-size: 18px;
+            }
+
+            #logout-container h2 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            #productList {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #logout-container {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            #logout-container h1 {
+                font-size: 18px;
+            }
+
+            #logout-container h2 {
+                font-size: 18px;
+            }
+
+            #dashboard-section {
+                width: 80%;
+            }
+
+            #sellerOrderList {
+                grid-template-columns: repeat(4, 1fr);
+                font-size: small;
+            }
+
+            #sellerOrderList img {
+                height: 100px;
+                width: 100px;
+            }
+
+            #nav_bar ul li {
+                margin: 15px;
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            #product-section input {
+                width: 90px;
+                font-size: medium;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+
+            #product-section button {
+                width: 90px;
+                font-size: smaller;
+                padding: 5px;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+                margin-top: 250px;
+            }
+
+            #logout-container {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            #logout-container h1 {
+                font-size: 18px;
+            }
+
+            #logout-container h2 {
+                font-size: 18px;
+            }
+
+            #nav_bar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                top: 0;
+                padding-top: 20px;
+            }
+
+            #nav_bar ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #nav_bar ul li {
+                margin: 10px;
+                flex: 1 0 120px;
+            }
+
+            #main-content {
+                margin: 0;
+                padding: 15px;
+            }
+
+            #dashboard-section {
+                width: 70%;
+                list-style-type: none;
+            }
+
+            .dashboard-card {
+                padding: 10px;
+                list-style-type: none;
+                margin-top: 10px;
+            }
+
+            #logout-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #logout-container h3,
+            #logout-container h1 {
+                margin: 5px 0;
+                text-align: center;
+            }
+
+            #logout-container button {
+                margin: 5px auto;
+            }
+
+            #nav_bar {
+                margin-top: -140px;
+            }
+
+            #sellerOrderList {
+                width: 100%;
+                grid-template-columns: repeat(4, 1fr);
+                font-size: small;
+            }
+
+            #sellerOrderList img {
+                height: 100px;
+                width: 100px;
+            }
+
+            #product-section input {
+                width: 90px;
+                font-size: smaller;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+
+            #product-section button {
+                width: 90px;
+                font-size: smaller;
+                padding: 5px;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #logo {
+                margin-top: 30px;
+            }
+
+            #logout-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            #logout-container h1 {
+                font-size: 18px;
+            }
+
+            #logout-container h2 {
+                font-size: 18px;
+            }
+
+            #logout-container button {
+                width: 100px;
+                text-align: center;
+                margin-left: 110%;
+            }
+
+            #nav_bar {
+                margin-top: -100px;
+            }
+
+            #productList {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #dashboard-section {
+                width: 80%;
+                padding: 15px;
+                margin: auto;
+            }
+
+            .dashboard-card {
+                padding: 10px;
+                list-style-type: none;
+                margin-top: 10px;
+            }
+
+            #sellerOrderList {
+                width: 80%;
+                grid-template-columns: repeat(4, 1fr);
+                font-size: small;
+            }
+
+            #sellerOrderList img {
+                height: 100px;
+                width: 100px;
+            }
+
+
+            #top-header {
+                flex-direction: row;
+                padding: 0px;
+                font-size: 10px;
+            }
+
+            #logo video {
+                height: 100px;
+                margin-top: -100px;
+            }
+
+            #nav_bar ul li {
+                flex: 1 0 10px;
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            input,
+            button {
+                width: 20%;
+                margin: 5px 0;
+            }
+
+            #container {
+                margin-top: 250px;
+            }
+
+            #product-section input {
+                width: 90px;
+                font-size: smaller;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+
+            #product-section button {
+                width: 90px;
+                font-size: smaller;
+                padding: 5px;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            #container {
+                margin-top: 250px;
+            }
+
+            #nav_bar ul li {
+                flex: 1 0 80px;
+                font-size: 13px;
+                padding: 6px;
+            }
+
+            .productCard {
+                padding: 15px;
+            }
+
+            #product-section input {
+                width: 90px;
+                font-size: smaller;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+
+            #product-section button {
+                width: 90px;
+                font-size: smaller;
+                padding: 5px;
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="top-header">
+        <div id="logo">
+            <video autoplay muted loop playsinline>
+                <source src="./images/logo.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div id="logout-container">
+            <h2>
+                E-Shoppy<br>Shop Anywhere
+            </h2>
+            <h1>Seller Dashboard</h1>
+            <h3><i class="fas fa-user-circle"></i> <span id="user-email"></span> <span id="user-role"></span></h3>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <div id="container">
+        <nav id="nav_bar">
+            <ul>
+                <li onclick="showSection('dashboard')">Dashboard</li>
+                <li onclick="showSection('product')">Product Manage</li>
+                <li onclick="showSection('order')">Order Manage</li>
+                <li onclick="showSection('account')">Account Settings</li>
+            </ul>
+        </nav>
+
+        <div id="main-content">
+
+            <div id="dashboard-section" style="display: none;">
+                <div class="dashboard-card">
+                    <li onclick="showSection('product')">
+                        <h1>Total Products</h1>
+                        <p id="totalProducts" style="font-size: 24px;"></p>
+                    </li>
+                </div>
+                <div class="dashboard-card">
+                    <li onclick="showSection('order')">
+                        <h1>Total Orders</h1>
+                        <p id="totalOrders" style="font-size: 24px;"></p>
+                    </li>
+                </div>
+            </div>
+
+            <div id="product-section" style="display: none;">
+                <input type="text" id="title" placeholder="Title">
+                <input type="text" id="description" placeholder="Description">
+                <input type="number" id="price" placeholder="Price">
+                <input type="text" id="category" placeholder="Category..">
+                <input type="number" id="discount" placeholder="Discount %">
+                <input type="file" id="productImageInput" />
+                <button onclick="uploadToCloudinary()">Upload Image</button>
+
+                <input type="text" id="imageURL" placeholder="Uploaded Image URL" readonly>
+
+                <button id="addProduct">Add Product</button>
+                <div id="productList"></div>
+            </div>
+            <div id="order-section">
+                <center>
+                    <h1>Orders for Your Products</h1>
+                </center>
+                <div id="sellerOrderList">
+                    <div>
+                        <center>
+                            <h3>Awaiting Orders</h3>
+                        </center>
+                        <div id="awaitingOrders" class="order-status-grid"></div>
+                    </div>
+                    <div>
+                        <center>
+                            <h3>Shipped Orders</h3>
+                        </center>
+                        <div id="shippedOrders" class="order-status-grid"></div>
+                    </div>
+                    <div>
+                        <center>
+                            <h3>Delivered Orders</h3>
+                        </center>
+                        <div id="deliveredOrders" class="order-status-grid"></div>
+                    </div>
+                    <div>
+                        <center>
+                            <h3>Cancelled Orders</h3>
+                        </center>
+                        <div id="cancelledOrders" class="order-status-grid"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="account-section" style="display: none;">Account settings coming soon...</div>
+        </div>
+    </div>
+
+    <!-- firebase connectivity <script type="module"> -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+        import { getDatabase, ref, push, set, onValue, remove, update, get } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDqfJUI0Orck3nDCB2Ulm-AgiZcWV92KcM",
+            authDomain: "democheck-c2d99.firebaseapp.com",
+            databaseURL: "https://democheck-c2d99-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "democheck-c2d99",
+            storageBucket: "democheck-c2d99.appspot.com",
+            messagingSenderId: "870409634136",
+            appId: "1:870409634136:web:68bad3814e92012d7ae52d",
+            measurementId: "G-KB6RD571R1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        window.onload = () => showSection("dashboard");
+
+        window.showSection = function (section) {
+            ["dashboard", "product", "order", "account"].forEach(id => {
+                const el = document.getElementById(`${id}-section`);
+                if (el) {
+                    el.style.display = id === section ? "block" : "none";
+                }
+            });
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) return window.location.href = "index.html";
+
+            document.getElementById("user-email").textContent = user.email;
+            document.getElementById("user-role").textContent = `(${sessionStorage.getItem("role")})`;
+
+
+            // Count total products for the seller
+            const productReff = ref(db, "products");
+            onValue(productReff, (snapshot) => {
+                let totalProducts = 0;
+                snapshot.forEach((datas) => {
+                    const data = datas.val();
+                    if (data.seller === user.uid) {
+                        totalProducts++;
+                    }
+                });
+                document.getElementById("totalProducts").textContent = totalProducts;
+            });
+
+            // Count total orders for the seller
+            const ordersRef = ref(db, "orders");
+            onValue(ordersRef, (snapshot) => {
+                let totalOrders = 0;
+                snapshot.forEach((datas) => {
+                    const order = datas.val();
+                    if (order.sellerID === user.uid) {
+                        totalOrders++;
+                    }
+                });
+                document.getElementById("totalOrders").textContent = totalOrders;
+            });
+
+            // Products Section
+            const productRef = ref(db, "products");
+            const productList = document.getElementById("productList");
+
+
+            onValue(productRef, (snapshot) => {
+                productList.innerHTML = "";
+
+                snapshot.forEach((child) => {
+                    const data = child.val();
+                    if (data.seller !== user.uid) return;
+
+                    const avgRating = data.rating?.length
+                        ? (data.rating.reduce((a, b) => a + b, 0) / data.rating.length).toFixed(1)
+                        : "No ratings";
+
+                    const originalPrice = parseFloat(data.price);
+                    const discountPercent = parseFloat(data.discount || 0);
+                    const discountedPrice = (originalPrice * (1 - discountPercent / 100)).toFixed(2);
+
+
+                    const card = document.createElement("div");
+                    card.className = "productCard";
+                    card.innerHTML = `
+          <img src="${data.image}" alt="${data.title}">
+          <h3>${data.title}</h3>
+          <p class="price">
+            <span style="text-decoration: line-through; color: gray;">₹${originalPrice.toFixed(2)}</span>
+            &nbsp;
+            ₹${discountedPrice}
+            <span style="color:red;"> (${discountPercent}% OFF)</span>
+          </p>
+          <p class="description">${data.description}</p>
+          <p><b>Category:</b> ${data.category || 'N/A'}</p>
+          <p class="ratings">⭐ Average Rating: ${avgRating} (${data.rating?.length || 0} ratings)</p>
+          <div class="comments">💬 Comments:<br>${(data.comments || []).map(c => `<p><b>${c.user}</b>: ${c.text}</p>`).join("") || "No comments"}</div>
+        `;
+
+                    const editBtn = document.createElement("button");
+                    editBtn.textContent = "Edit";
+                    editBtn.className = "edit-btn";
+
+                    const delBtn = document.createElement("button");
+                    delBtn.textContent = "Delete";
+                    delBtn.className = "delete-btn";
+
+                    card.append(editBtn, delBtn);
+                    productList.appendChild(card);
+
+                    editBtn.onclick = () => {
+                        const createLabeledInput = (labelText, defaultValue, inputType = "text") => {
+                            const wrapper = document.createElement("div");
+                            const label = document.createElement("label");
+                            label.textContent = `${labelText}: `;
+                            const input = document.createElement("input");
+                            input.type = inputType;
+                            input.value = defaultValue;
+                            wrapper.append(label, input);
+                            return { wrapper, input };
+                        };
+
+                        const title = createLabeledInput("Title", data.title);
+                        const desc = createLabeledInput("Description", data.description);
+                        const price = createLabeledInput("Price", data.price, "number");
+                        const category = createLabeledInput("Category", data.category || "");
+                        const discount = createLabeledInput("Discount", data.discount || 0, "number");
+                        const image = createLabeledInput("Image URL", data.image);
+
+                        const fileInputWrapper = document.createElement("div");
+                        fileInputWrapper.innerHTML = `
+        <label>Upload New Image: </label>
+        <input type="file" id="editImageFileInput-${child.key}">
+        <button onclick="uploadEditedImage('${child.key}')">Upload</button>
+    `;
+
+                        const saveBtn = document.createElement("button");
+                        saveBtn.textContent = "Save";
+                        saveBtn.className = "edit-btn";
+
+                        card.innerHTML = "";
+                        [title, desc, price, category, discount, image].forEach(field => card.appendChild(field.wrapper));
+                        card.appendChild(fileInputWrapper);
+                        card.append(saveBtn);
+
+                        saveBtn.onclick = () => {
+                            update(ref(db, `products/${child.key}`), {
+                                title: title.input.value,
+                                description: desc.input.value,
+                                price: price.input.value,
+                                category: category.input.value,
+                                discount: discount.input.value,
+                                image: image.input.value,
+                                rating: data.rating || [],
+                                comments: data.comments || [],
+                                seller: user.uid
+                            });
+                        };
+                    };
+
+
+                    delBtn.onclick = () => {
+                        if (confirm("Delete this product?")) {
+                            remove(ref(db, `products/${child.key}`));
+                        }
+                    };
+                });
+            });
+
+            document.getElementById("addProduct").addEventListener("click", () => {
+                const title = document.getElementById("title").value.trim();
+                const description = document.getElementById("description").value.trim();
+                const price = document.getElementById("price").value.trim();
+                const image = document.getElementById("imageURL").value.trim();
+                const category = document.getElementById("category").value.trim();
+                const discount = document.getElementById("discount").value.trim();
+
+                if (!title || !description || !price || !category || !discount || !image) {
+                    alert("Please fill all fields.");
+                    return;
+                }
+
+                const newProductRef = push(ref(db, "products"));
+                set(newProductRef, {
+                    title, description, price, category, discount, image,
+                    rating: [5, 4],
+                    comments: [],
+                    seller: user.uid
+                });
+
+                ["title", "description", "price", "image", "category", "discount"].forEach(id => document.getElementById(id).value = "");
+            });
+
+            // Seller Orders Section
+            const awaitingContainer = document.getElementById("awaitingOrders");
+            const shippedContainer = document.getElementById("shippedOrders");
+            const deliveredContainer = document.getElementById("deliveredOrders");
+            const cancelledContainer = document.getElementById("cancelledOrders");
+
+            onValue(ref(db, "orders"), (snapshot) => {
+                awaitingContainer.innerHTML = "";
+                shippedContainer.innerHTML = "";
+                deliveredContainer.innerHTML = "";
+                cancelledContainer.innerHTML = "";
+
+                snapshot.forEach((orderSnap) => {
+                    const order = orderSnap.val();
+
+                    // Show only this seller's orders, skip pending ones
+                    if (order.sellerID !== user.uid || order.status === "pending") return;
+
+                    get(ref(db, "products/" + order.productID)).then((productSnap) => {
+                        const product = productSnap.val();
+                        if (!product) return;
+
+                        const quantity = order.quantity || 1;
+                        const price = parseFloat(product.price || 0);
+                        const discount = parseFloat(product.discount || 0);
+                        const discountedPrice = price * (1 - discount / 100);
+                        const totalPrice = discountedPrice * quantity;
+
+                        const address = order.address || "Not provided";
+                        const phone = order.phone || "Not provided";
+                        const payment = order.payment || {};
+                        const method = payment.method || "Not specified";
+                        const transactionID = payment.transactionID || "N/A";
+
+                        let paymentStatus = "Not specified";
+                        const isCOD = method === "COD";
+                        const isPrepaid = method === "Card" || method === "UPI";
+
+                        if (order.status === "cancelled") {
+                            paymentStatus = "refunded";
+                            update(ref(db, "orders/" + orderSnap.key + "/payment"), {
+                                status: "refunded"
+                            }).catch(err => console.error("Error updating refund status:", err));
+                        } else if (isCOD && order.status !== "delivered") {
+                            paymentStatus = "pending";
+                        } else if (isPrepaid || (isCOD && order.status === "delivered")) {
+                            paymentStatus = "paid";
+                            update(ref(db, "orders/" + orderSnap.key + "/payment"), {
+                                status: "paid"
+                            }).catch(err => console.error("Error updating paid status:", err));
+                        }
+
+                        const card = document.createElement("div");
+                        card.className = "order-card";
+                        card.innerHTML = `
+                <img src="${product.image}" alt="${product.title}">
+                <h2>${product.title}</h2>
+                <p><strong>Buyer ID:</strong> ${order.buyerID}</p>
+                <p><strong>Quantity:</strong> ${quantity}</p>
+                <p><strong>Total Price:</strong> ₹${totalPrice.toFixed(2)}</p>
+                <div class="address">
+                    <h4>💳 Address Details</h4>
+                    <p><strong>Address:</strong> ${address}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
+                </div>
+                <div class="payment-details">
+                    <h4>💳 Payment Details</h4>
+                    <p><b>Method:</b> ${method}</p>
+                    <p><b>Status:</b> ${paymentStatus}</p>
+                    <p><b>Transaction ID:</b> ${transactionID}</p>
+                </div><br>
+                <label><strong>Status:</strong>
+                    <select class="status-select">
+                        <option value="awaiting" ${order.status === "awaiting" ? "selected" : ""}>Awaiting</option>
+                        <option value="shipped" ${order.status === "shipped" ? "selected" : ""}>Shipped</option>
+                        <option value="delivered" ${order.status === "delivered" ? "selected" : ""}>Delivered</option>
+                        <option value="cancelled" ${order.status === "cancelled" ? "selected" : ""}>Cancelled</option>
+                    </select>
+                </label>
+            `;
+
+                        const select = card.querySelector(".status-select");
+                        select.addEventListener("change", () => {
+                            const newStatus = select.value;
+                            update(ref(db, "orders/" + orderSnap.key), { status: newStatus })
+                                .then(() => alert("Order status updated to: " + newStatus))
+                                .catch(err => console.error("Error updating status:", err));
+                        });
+
+                        // Append to respective container
+                        if (order.status == "awaiting") awaitingContainer.appendChild(card);
+                        else if (order.status == "shipped") shippedContainer.appendChild(card);
+                        else if (order.status == "delivered") deliveredContainer.appendChild(card);
+                        else if (order.status == "cancelled") cancelledContainer.appendChild(card);
+                    });
+                });
+            });
+        });
+
+        document.getElementById("logout-btn").addEventListener("click", async () => {
+            try {
+                await signOut(auth);
+                sessionStorage.clear();
+                alert("Logged out successfully");
+                window.location.href = "index.html";
+            } catch (err) {
+                alert("Logout failed.");
+                console.error(err);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
+<script>
+    async function uploadToCloudinary() {
+        const cloudName = "dbftgtgs9";
+        const uploadPreset = "Demo_product_upload_image";
+
+        const fileInput = document.getElementById("productImageInput");
+        const file = fileInput.files[0];
+        if (!file) {
+            alert("Please choose an image to upload.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", uploadPreset);
+
+        try {
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.secure_url) {
+                const imageUrl = data.secure_url;
+
+                // Set to hidden input
+                document.getElementById("imageURL").value = imageUrl;
+
+                // Copy to clipboard
+                await navigator.clipboard.writeText(imageUrl);
+
+                // Show popup
+                alert("Image uploaded!\n🔗 Link copied to clipboard:\n" + imageUrl);
+            } else {
+                alert("Image upload failed.");
+            }
+
+        } catch (error) {
+            console.error("Upload error:", error);
+            alert("Something went wrong while uploading.");
+        }
+    }
+
+
+    async function uploadEditedImage(productKey) {
+        const cloudName = "dbftgtgs9";
+        const uploadPreset = "Demo_product_upload_image";
+
+        const fileInput = document.getElementById(`editImageFileInput-${productKey}`);
+        const file = fileInput.files[0];
+        if (!file) {
+            alert("Please select a file to upload.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", uploadPreset);
+
+        try {
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.secure_url) {
+                // Find the corresponding image input and update it
+                const allImageInputs = document.querySelectorAll("input[type='text']");
+                for (const input of allImageInputs) {
+                    if (input.value === "" || input.placeholder === "Image URL") {
+                        input.value = data.secure_url;
+                        break;
+                    }
+                }
+
+                await navigator.clipboard.writeText(data.secure_url);
+                alert("New image uploaded and link copied to clipboard:\n" + data.secure_url);
+            } else {
+                alert("Image upload failed.");
+            }
+        } catch (err) {
+            console.error("Upload error:", err);
+            alert("Something went wrong during upload.");
+        }
+    }
+</script>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - E-shoppy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;!
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #bg-video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
+
+    .signup-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .signup-container h2,
+    h3 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    select {
+      background-color: #d4bbff;
+      color: black;
+      font-weight: bold;
+    }
+
+    option {
+      background-color: rgb(227, 198, 255);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #25045d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background-color: #c4adff;
+      color: #25045d;
+    }
+
+    #signup-message {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .or {
+      color: white;
+      text-align: center;
+      margin: 10px 0;
+    }
+    h4{
+      color: #fff;
+      float: right;
+    }
+    a{
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      background-color: #d4bbff;
+      padding: 5px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-left: 5px;
+
+    }
+    a:hover{
+      background-color: cornsilk;
+    }
+    img:hover{
+        box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="./images/loginpage.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Signup Form -->
+  <div class="signup-container">
+    <h2>Welcome to E-Shoppy</h2>
+    <h3>Sign Up</h3>
+    <input type="email" id="signup-email" placeholder="Enter Email" />
+    <input type="password" id="signup-password" placeholder="Enter Password" />
+    <select id="role">
+      <option value="">Select role</option>
+      <option value="seller">Seller</option>
+      <option value="buyer">Buyer</option>
+    </select>
+    <button id="signup-btn">Sign Up</button>
+    <p class="or">or</p>
+    <div style="text-align: center;">
+  <img
+    id="google-signup-btn"
+    src="https://developers.google.com/identity/images/g-logo.png"
+    alt="Sign up with Google"
+    title="Sign up with Google"
+    style="cursor: pointer; width: 45px; height: 45px; border-radius: 50%; border: 2px solid #fff; background: white; transition: transform 0.2s ease;"
+    aria-label="Sign up with Google"
+  />
+<br>
+</div><br>
+<a href="index.html">Home</a></h4>
+<h4>Already Registered? <a href="login.html">Login</a></h4>
+
+    <p id="signup-message"></p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      GoogleAuthProvider,
+      signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+    import {
+      getDatabase,
+      ref,
+      set,
+      get
+    } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDqfJUI0Orck3nDCB2Ulm-AgiZcWV92KcM",
+      authDomain: "democheck-c2d99.firebaseapp.com",
+      databaseURL: "https://democheck-c2d99-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "democheck-c2d99",
+      storageBucket: "democheck-c2d99.appspot.com",
+      messagingSenderId: "870409634136",
+      appId: "1:870409634136:web:68bad3814e92012d7ae52d",
+      measurementId: "G-KB6RD571R1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const msg = document.getElementById("signup-message");
+
+    // Email & Password Sign-Up
+    document.getElementById("signup-btn").addEventListener("click", async () => {
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
+      const role = document.getElementById("role").value;
+      msg.innerText = "";
+      msg.style.color = "red";
+
+      if (!email || !password || !role) {
+        msg.innerText = "Please fill all fields.";
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await set(ref(db, 'users/' + userCredential.user.uid), { email, role });
+        msg.innerText = "Registration successful!";
+        msg.style.color = "lightgreen";
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 1500);
+      } catch (error) {
+        msg.innerText = error.message;
+      }
+    });
+
+    // Google Sign-Up
+    const provider = new GoogleAuthProvider();
+    document.getElementById("google-signup-btn").addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const userRef = ref(db, 'users/' + user.uid);
+        const snapshot = await get(userRef);
+
+        if (!snapshot.exists()) {
+          await set(userRef, { email: user.email, role: "buyer" }); // Default role
+        }
+
+        msg.innerText = "Google Sign-Up successful!";
+        msg.style.color = "lightgreen";
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 1500);
+      } catch (error) {
+        console.error(error);
+        msg.innerText = error.message;
+        msg.style.color = "red";
+      }
+    });
+  </script>
+</body>
+
+</html>

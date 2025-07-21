@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User_Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+ <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: antiquewhite;
+  }
+
+  header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  #logout-container {
+    display: flex;
+    width: 100%;
+    margin-top: -100px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+  }
+
+  #logout-container h3 {
+    font-weight: bold;
+    margin-left: 40%;
+  }
+
+  #logout-container h2 {
+    font-weight: bold;
+    margin-left: 100px;
+  }
+
+  #logout-btn {
+    background-color: rgb(255, 55, 0);
+    padding: 10px;
+    width: 80px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+    color: aliceblue;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #logout-btn:hover {
+    background-color: #c0392b;
+  }
+
+  #container_nav {
+    width: 45%;
+    margin-left: 23%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+    background-color: #e6e0ff;
+    margin-top: -70px;
+  }
+
+  .nav-bar ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    padding: 15px 0;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .nav-bar ul li a {
+    position: relative;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    padding-bottom: 5px;
+    font-size: 1.1em;
+    transition: all 0.3s;
+  }
+
+  .nav-bar ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background-color: #000;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .nav-bar ul li a:hover::after {
+    width: 100%;
+  }
+
+  .nav-bar ul li {
+    position: relative;
+  }
+
+  #cart-count {
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    background-color: red;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: none;
+  }
+
+  .cards-products {
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin: 30px auto;
+    max-width: 1400px;
+  }
+
+  .productcard {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .productcard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  #searchInput{
+    width: 60%;
+  }
+  .cards-products img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+  }
+
+  .cards-products h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #222;
+  }
+
+  .cards-products h3 {
+    font-size: 16px;
+    color: #27ae60;
+    font-weight: bold;
+  }
+
+  .bounce-btn,
+  .cart-btn,
+  .buy-btn {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .bounce-btn:hover,
+  .cart-btn:hover,
+  .buy-btn:hover {
+    animation: bounce 0.5s;
+    background-color: #357ABD;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1400px) {
+    .cards-products {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    #container_nav {
+      width: 60%;
+      margin-left: 20%;
+    }
+    
+    #logout-container h3 {
+      margin-left: 30%;
+    }
+    
+    #logout-container h2 {
+      margin-left: 50px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .cards-products {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    #container_nav {
+      width: 70%;
+      margin-left: 15%;
+    }
+    
+    #logout-container h3 {
+      margin-left: 20%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cards-products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    #container_nav {
+      width: 80%;
+      margin-left: 10%;
+    }
+    
+    #logout-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: -120px;
+      padding-top: 25px;
+    }
+    
+    #logout-container h3,
+    #logout-container h2 {
+      margin-left: 0;
+      text-align: center;
+    }
+    
+    .nav-bar ul {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .cards-products {
+      display: grid;
+      grid-template-columns:repeat(2, 1fr);
+      max-width: 500px;
+    }
+    
+    #container_nav {
+      width: 90%;
+      margin-left: 5%;
+    }
+    
+    header {
+      font-size: 20px;
+      padding: 15px;
+    }
+    
+    .nav-bar ul {
+      flex-direction: column;
+      gap: 15px;
+      margin-left: 20px;
+    }
+    
+    #logout-btn {
+      width: 100%;
+      margin-right: 0;
+    }
+    #searchInput{
+      width: 70%;
+    }
+    #filtering{
+      margin-top: 5px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .cards-products {
+      padding: 15px;
+    }
+    
+    .productcard {
+      padding: 15px;
+    }
+    
+    .cards-products img {
+      height: 150px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <div id="logo">
+    <video autoplay muted loop playsinline>
+      <source src="./images/logo.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Logout -->
+  <div id="logout-container">
+    <h2>
+      <font size="6px">E-Shoppy</font> <br> Shop Anywhere
+    </h2>
+    <h3><i class="fas fa-user-circle"></i>
+      <font color="green"><span id="user-email"></span></font>
+    </h3>
+    <button id="logout-btn">Logout</button>
+  </div>
+
+  <div id="container_nav">
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="#cards-products">Best Sellers</a></li>
+        <li><a href="Myorder.html">My Orders</a></li>
+        <li><a href="#about us">About Us</a></li>
+        <li><a href="#customer">Customer Service</a></li>
+        <li>
+          <a href="order.html"><i class="fas fa-shopping-cart" class="cart-btn" style="cursor:pointer;"></i></a>
+        </li>
+        <li>
+          <a href="wishlist.html"></a><i class="fa-solid fa-heart" class="wish-btn" style="cursor:pointer;"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div style="text-align:center; margin-top: 30px;">
+    <input type="text" id="searchInput" placeholder="Search products..."
+      style="padding: 10px; border-radius: 5px; border: 1px solid gray;">
+    <button id="searchBtn" class="bounce-btn">Search</button>
+  </div>
+  <div id="filtering">
+    <select id="price_sort">
+      <option value="">Sort by Price</option>
+      <option value="ascending">Lowest</option>
+      <option value="decending">Highest</option>
+    </select>
+    <select id="ratings_sort">
+      <option value="">Sort by Ratings</option>
+      <option value="1">1 above</option>
+      <option value="2">2 above</option>
+      <option value="3">3 above</option>
+      <option value="4">4 above</option>
+    </select>
+    <select id="size">
+      <option value="">size</option>
+      <option value="s">S</option>
+      <option value="m">M</option>
+      <option value="l">L</option>
+    </select>
+    <select id="category_filter">
+      <option value="">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="dress">Dress</option>
+      <option value="home appliance">Home Appliance</option>
+      <option value="mobiles">Mobiles</option>
+      <option value="toys">Toys</option>
+    </select>
+    <select id="discount_filter">
+      <option value="">Min Discount %</option>
+      <option value="10">10% or more</option>
+      <option value="20">20% or more</option>
+      <option value="30">30% or more</option>
+      <option value="50">50% or more</option>
+    </select>
+  </div>
+  <ul class="cards-products"></ul>
+  <hr>
+  <!-- About Us Section -->
+      <section class="about-section">
+    <div class="about-container">
+      <h2>About Us</h2>
+      <p>
+        Welcome to <strong>E-Shoppy</strong>, your trusted partner in online shopping. We are a dynamic e-commerce platform that brings together quality products, excellent service, and a seamless digital experience.
+      </p>
+      <p>
+        Our journey started in 2025 with a vision to redefine how people shop. Today, we are proud to serve thousands of happy customers and growing businesses nationwide.
+      </p>
+    </div>
+
+    <div class="mission-section">
+      <h2>Our Vision & Mission</h2>
+      <p><strong>Vision:</strong> To be the most customer-centric and innovative e-commerce platform in the world.</p>
+      <p><strong>Mission:</strong> Empower sellers, delight buyers, and transform the digital retail experience by offering reliable, fast, and budget-friendly services.</p>
+    </div>
+
+    <div class="values-section">
+      <h2>Our Core Values</h2>
+      <ul>
+        <li><strong>Customer First:</strong> We go above and beyond to deliver the best service.</li><br>
+        <li><strong>Integrity:</strong> Honesty and transparency guide everything we do.</li><br>
+        <li><strong>Innovation:</strong> Constantly improving and adapting to new trends.</li><br>
+        <li><strong>Empowerment:</strong> Helping small businesses grow.</li><br>
+        <li><strong>Community:</strong> Giving back to society through responsible practices.</li>
+      </ul>
+    </div>
+
+    <div class="team-section">
+      <h2>Meet the Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <i class="fas fa-user-circle fa-3x"></i>
+          <h4>Hemavathi</h4>
+          <p>Founder & CEO</p>
+        </div>
+        <div class="team-member">
+          <i class="fas fa-user-circle fa-3x"></i>
+          <h4>Sanjay A</h4>
+          <p>CTO</p>
+        </div>
+        <div class="team-member">
+          <i class="fas fa-user-circle fa-3x"></i>
+          <h4>Divya</h4>
+          <p>Marketing Head</p>
+        </div>
+        <div class="team-member">
+          <i class="fas fa-user-circle fa-3x"></i>
+          <h4>Suhas</h4>
+          <p>Product Head</p>
+        </div>
+        <div class="team-member">
+          <i class="fas fa-user-circle fa-3x"></i>
+          <h4>Raji</h4>
+          <p> Manager </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonials-section">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial">
+        <p>"E-Shoppy has become my go-to place for online shopping. Affordable prices and quick delivery!"</p>
+        <h4>- Priya M., Delhi</h4>
+      </div>
+      <div class="testimonial">
+        <p>"I was able to start selling my handmade products easily on E-Shoppy. Thank you for supporting small businesses!"</p>
+        <h4>- Aman G., Jaipur</h4>
+      </div>
+    </div>
+  </section>
+<br>
+
+  <div id="customer">
+    <center>
+      <h1>Customer Service</h1>
+    </center><br>
+    <div id="customer-services">
+      <div id="customer-cards">
+        <img src="./images/ordersupport.png" alt="order support">
+        <h2>🛒 Order Support</h2>
+        <ul>
+          <li>Track your orders in real-time</li>
+          <li>Modify or cancel before shipping</li>
+          <li>Get order confirmations via email/SMS</li>
+        </ul>
+      </div>
+      <div id="customer-cards">
+        <img src="./images/deliverys.png" alt="delivery">
+
+        <h3>📦 Delivery & Shipping</h3>
+        <ul>
+          <li>Estimated delivery dates</li>
+          <li>Fast shipping options available</li>
+          <li>Change delivery address</li>
+        </ul>
+      </div>
+      <div id="customer-cards">
+        <img src="./images/returnandrefund.png" alt="return and refund">
+        <h3>🔁 Returns & Refunds</h3>
+        <ul>
+          <li>Easy return policies</li>
+          <li>Track your refund status</li>
+          <li>Exchange faulty or wrong items</li>
+        </ul>
+      </div>
+      <div id="customer-cards">
+        <img src="./images/payments.png" alt="">
+        <h3>💳 Payment Support</h3>
+        <ul>
+          <li>Multiple payment methods</li>
+          <li>Help with failed transactions</li>
+          <li>Download digital invoices</li>
+        </ul>
+      </div>
+      <div id="customer-cards">
+        <img src="./images/customerservice.png" alt="">
+        <h3>📞 Customer Assistance</h3>
+        <ul>
+          <li>Live chat and phone support</li>
+          <li>Email query resolution</li>
+          <li>FAQ and help center</li>
+        </ul>
+      </div>
+      <div id="customer-cards">
+        <img src="./images/accservice.png" alt="">
+        <h3>👤 Account Services</h3>
+        <ul>
+          <li>Manage profile and addresses</li>
+          <li>Reset passwords easily</li>
+          <li>View your order history</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <center>
+    <h1>Other Quick Access</h1>
+  </center>
+  <footer class="footer">
+    <div class="footer-cards">
+      <div class="footer-card">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9433076464957!2d77.6322698!3d12.9113653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1525f3226a65%3A0x9d0c72b3bd41f2ef!2sMasai%20School!5e0!3m2!1sen!2sin!4v1749655328214!5m2!1sen!2sin"
+          width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+      <div class="footer-card">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=support@email.com&su=Support%20Request&body=Hello%20E-shoppy%20User%2C%0AHow%20can%20I%20help%20you."
+            target="_blank">Email via Gmail</a>
+        </p>
+        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+        <p><i class="fas fa-map-marker-alt"></i> 123 E-Shop, Bangalore</p>
+      </div>
+      <div class="footer-card">
+        <h3>Quick Links</h3>
+        <p><a href="#">FAQ</a></p>
+        <p><a href="#">Shipping Info</a></p>
+        <p><a href="#">Enquiry</a></p>
+      </div>
+      <div class="footer-card">
+        <h3>Follow Us</h3>
+        <p><a href="#"><i class="fab fa-facebook"></i> Facebook</a></p>
+        <p><a href="#"><i class="fab fa-instagram"></i> Instagram</a></p>
+        <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 E-Shoppy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+    import {
+      getAuth,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+    import {
+      getDatabase,
+      ref,
+      onValue,
+      get,
+      child,
+      push
+    } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDqfJUI0Orck3nDCB2Ulm-AgiZcWV92KcM",
+      authDomain: "democheck-c2d99.firebaseapp.com",
+      databaseURL: "https://democheck-c2d99-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "democheck-c2d99",
+      storageBucket: "democheck-c2d99.appspot.com",
+      messagingSenderId: "870409634136",
+      appId: "1:870409634136:web:68bad3814e92012d7ae52d",
+      measurementId: "G-KB6RD571R1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    document.getElementById('logout-btn').addEventListener("click", async () => {
+      await signOut(auth);
+      alert("Logged out successfully");
+      window.location.href = "index.html";
+    });
+
+    if (sessionStorage.getItem("role") !== "buyer") {
+      window.location.href = "admin_dashboard.html";
+    }
+
+    const cardsContainer = document.querySelector('.cards-products');
+    let allProducts = [];
+
+    onValue(ref(db, 'products'), (snapshot) => {
+      allProducts = [];
+      snapshot.forEach(product => {
+        const data = product.val();
+        data.id = product.key; // set id from Firebase key
+        allProducts.push(data);
+      });
+      displayProducts(allProducts);
+    });
+
+    function displayProducts(products) {
+      cardsContainer.innerHTML = '';
+      if (products.length === 0) {
+        cardsContainer.innerHTML = "<p>No matching products found.</p>";
+        return;
+      }
+
+      products.forEach(data => {
+        const title = data.title || "No Title";
+        const image = data.image || "https://via.placeholder.com/150";
+        const price = data.price || 0;
+        const discount = parseFloat(data.discount || 0);
+        const discountedPrice = price - (price * discount / 100);
+        const avg = avgRating(data.rating);
+        const stars = generateStars(avg);
+
+        const card = document.createElement('div');
+        card.className = 'productcard';
+        card.innerHTML = `
+          <img src="${image}" alt="${title}">
+          <h2>${title}</h2>
+          <h3><span style="text-decoration: line-through; color: gray;">₹${price}</span> 
+          <span style="color: green;">₹${discountedPrice.toFixed(0)}</span></h3>
+          <span style="color: red; font-size: 0.9em;">(${discount}% OFF)</span>
+          <div class="stars">${stars} (${avg.toFixed(1)})</div>
+          <button class="cart-btn">Add to cart</button>
+          <button class="buy-btn">Buy Now</button>
+        `;
+
+        card.querySelector(".cart-btn").addEventListener("click", () => {
+          addtocart(data.id, false);
+        });
+
+        card.querySelector(".buy-btn").addEventListener("click", () => {
+          addtocart(data.id, true);
+        });
+
+        cardsContainer.appendChild(card);
+      });
+    }
+
+    function addtocart(productId, isBuyNow = false) {
+      const user = auth.currentUser;
+
+      if (!user) {
+        alert("Please login first.");
+        return;
+      }
+
+      get(ref(db, 'products/' + productId))
+        .then(snapshot => {
+          const product = snapshot.val();
+          if (!product) throw new Error("Product not found");
+
+          const orderData = {
+            productID: productId,
+            buyerID: user.uid,
+            sellerID: product.seller,
+            timestamp: Date.now(),
+            status: "pending",
+            quantity: 1,
+            totalPrice: parseFloat(product.price)
+          };
+
+          return push(ref(db, "orders"), orderData);
+        })
+        .then(() => {
+          alert(isBuyNow ? "Are you Sure want to buy product" : "Product added to cart.");
+          if (isBuyNow) {
+            window.location.href = "order.html";
+          }
+        })
+        .catch(error => {
+          console.error("Error adding order:", error);
+          alert("Error placing order.");
+        });
+    }
+
+    function avgRating(ratingObj) {
+      if (!ratingObj || typeof ratingObj !== 'object') return 0;
+      const values = Object.values(ratingObj).map(r => parseFloat(r));
+      if (values.length === 0) return 0;
+      const sum = values.reduce((acc, val) => acc + val, 0);
+      return sum / values.length;
+    }
+
+    function generateStars(avg) {
+      const fullStars = Math.floor(avg);
+      const halfStar = avg % 1 >= 0.5;
+      let stars = '★'.repeat(fullStars);
+      if (halfStar) stars += '½';
+      return stars.padEnd(5, '☆');
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.getElementById('user-email').innerText = user.email;
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchBtn');
+
+    function handleSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        displayProducts(allProducts);
+        return;
+      }
+
+      const filtered = allProducts.filter(p =>
+        p.title && p.title.toLowerCase().includes(query)
+      );
+
+      displayProducts(filtered);
+    }
+
+    searchButton.addEventListener('click', debounce(handleSearch, 300));
+    searchInput.addEventListener('input', debounce(handleSearch, 300));
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSearch();
+    });
+
+    function debounce(func, delay) {
+      let timeout;
+      return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(func, delay);
+      };
+    }
+
+    document.getElementById('category_filter').addEventListener('change', applyFilters);
+    document.getElementById('price_sort').addEventListener('change', applyFilters);
+    document.getElementById('ratings_sort').addEventListener('change', applyFilters);
+    document.getElementById('size').addEventListener('change', applyFilters);
+    document.getElementById('discount_filter').addEventListener('change', applyFilters);
+
+    function applyFilters() {
+      let filtered = [...allProducts];
+      const category = document.getElementById('category_filter').value.toLowerCase();
+      const priceSort = document.getElementById('price_sort').value;
+      const ratingsFilter = document.getElementById('ratings_sort').value;
+      const size = document.getElementById('size').value.toLowerCase();
+      const discountFilter = parseInt(document.getElementById('discount_filter').value);
+
+      if (category) filtered = filtered.filter(p => p.category?.toLowerCase() === category);
+      if (size) filtered = filtered.filter(p => p.size?.toLowerCase() === size);
+      if (!isNaN(discountFilter)) filtered = filtered.filter(p => parseFloat(p.discount || 0) >= discountFilter);
+
+      if (priceSort === 'ascending') filtered.sort((a, b) => a.price - b.price);
+      else if (priceSort === 'descending') filtered.sort((a, b) => b.price - a.price);
+
+      if (ratingsFilter) {
+        const threshold = parseInt(ratingsFilter);
+        filtered = filtered.filter(p => avgRating(p.rating) >= threshold);
+      }
+
+      displayProducts(filtered);
+    }
+  </script>
+
+</body>
+
+</html>

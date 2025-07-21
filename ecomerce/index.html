@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <!-- Top bar -->
+    <div id="logo">
+        <video autoplay muted loop playsinline>
+            <source src="./images/logo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="container">
+        <div class="top-bar">
+            <h2>
+                <font size="6px">E-Shoppy</font> <br> Shop Anywhere
+            </h2>
+            <div class="actions">
+                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                <a href="register.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div id="container_nav">
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="#cards-products">Best Sellers</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="login.html">Store</a></li>
+                <li><a href="#">New Release</a></li>
+                <li><a href="#customer">Customer Service</a></li>
+            </ul>
+        </nav>
+    </div><br><br>
+
+    <!-- Hero Section -->
+    <div class="main-section">
+        <video autoplay muted loop playsinline>
+            <source src="./images/v2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <div class="main-text">
+            <h1>Discover Amazing Deals</h1>
+            <p>Get the best products at unbeatable prices.</p>
+            <button onclick="window.location.href='login.html'">Explore More</button>
+        </div>
+    </div>
+
+    <!-- Product Cards -->
+    <div id="cards-container">
+        <center>
+            <h1>Explore Our Top Product Picks</h1>
+        </center>
+        <br><br>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products..." />
+            <button id="searchBtn">Search</button>
+        </div>
+        <br>
+        <div id="filtering">
+            <select id="price_sort">
+                <option value="">Sort by Price</option>
+                <option value="ascending">Lowest</option>
+                <option value="decending">Highest</option>
+            </select>
+            <select id="ratings_sort">
+                <option value="">Sort by Ratings</option>
+                <option value="asc_rating">1-3</option>
+                <option value="desc_rating">Above 4</option>
+            </select>
+            <select id="Gender">
+                <option value="">Gender</option>
+                <option value="kids">Kids</option>
+                <option value="women">Women</option>
+                <option value="men">Men</option>
+            </select>
+            <select id="category_filter">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="dress">Dress</option>
+                <option value="home appliance">Home Appliance</option>
+                <option value="mobiles">Mobiles</option>
+                <option value="toys">Toys</option>
+            </select>
+            <select id="discount_filter">
+                <option value="">Min Discount %</option>
+                <option value="10">10% or more</option>
+                <option value="20">20% or more</option>
+                <option value="30">30% or more</option>
+                <option value="50">50% or more</option>
+            </select>
+        </div>
+        <div id="Cards">
+        <div class="cards-products"></div>
+        </div>
+    </div>
+
+    <!-- company videos -->
+    <br>
+    <div class="company">
+        <div class="content">
+            <center>
+                <h1>What Important in products launching looks</h1>
+            </center>
+        </div>
+        <div class="gallery">
+            <video autoplay muted loop playsinline>
+                <source src="./images/aboutus1.mp4" type="video/mp4" />
+            </video>
+            <video autoplay muted loop playsinline>
+                <source src="./images/aboutus2.mp4" type="video/mp4" />
+            </video>
+            <video autoplay muted loop playsinline>
+                <source src="./images/aboutus3.mp4" type="video/mp4" />
+            </video>
+        </div>
+
+    </div>
+
+    <br>
+    <div id="customer">
+        <center>
+            <h1>Why Choose Us</h1>
+        </center><br>
+        <div id="customer-services">
+            <div id="customer-cards">
+                <img src="./images/ordersupport.png" alt="order support">
+                <h2>🛒 Order Support</h2>
+                <ul>
+                    <li>Track your orders in real-time</li>
+                    <li>Modify or cancel before shipping</li>
+                    <li>Get order confirmations via email/SMS</li>
+                </ul>
+            </div>
+            <div id="customer-cards">
+                <img src="./images/deliverys.png" alt="delivery">
+
+                <h3>📦 Delivery & Shipping</h3>
+                <ul>
+                    <li>Estimated delivery dates</li>
+                    <li>Fast shipping options available</li>
+                    <li>Change delivery address</li>
+                </ul>
+            </div>
+            <div id="customer-cards">
+                <img src="./images/returnandrefund.png" alt="return and refund">
+                <h3>🔁 Returns & Refunds</h3>
+                <ul>
+                    <li>Easy return policies</li>
+                    <li>Track your refund status</li>
+                    <li>Exchange faulty or wrong items</li>
+                </ul>
+            </div>
+            <div id="customer-cards">
+                <img src="./images/payments.png" alt="">
+                <h3>💳 Payment Support</h3>
+                <ul>
+                    <li>Multiple payment methods</li>
+                    <li>Help with failed transactions</li>
+                    <li>Download digital invoices</li>
+                </ul>
+            </div>
+            <div id="customer-cards">
+                <img src="./images/customerservice.png" alt="">
+                <h3>📞 Customer Assistance</h3>
+                <ul>
+                    <li>Live chat and phone support</li>
+                    <li>Email query resolution</li>
+                    <li>FAQ and help center</li>
+                </ul>
+            </div>
+            <div id="customer-cards">
+                <img src="./images/accservice.png" alt="">
+                <h3>👤 Account Services</h3>
+                <ul>
+                    <li>Manage profile and addresses</li>
+                    <li>Reset passwords easily</li>
+                    <li>View your order history</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<br>
+    <!-- Summary Cards -->
+     <center><h1>Daily Trackings</h1></center>
+    <div class="summary-cards">
+        <div class="card" id="userCountCard">
+            <h3>Total Users</h3>
+            <p id="userCount">0</p>
+        </div>
+        <div class="card" id="productCountCard">
+            <h3>Total Products</h3>
+            <p id="productCount">0</p>
+        </div>
+        <div class="card" id="orderCountCard">
+            <h3>Total Orders</h3>
+            <p id="orderCount">0</p>
+        </div>
+    </div>
+    <br>
+    <!-- Footer -->
+    <center>
+        <h1>Other Quick Access</h1>
+    </center>
+    <footer class="footer">
+        <div class="footer-cards">
+            <div class="footer-card">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9433076464957!2d77.6322698!3d12.9113653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1525f3226a65%3A0x9d0c72b3bd41f2ef!2sMasai%20School!5e0!3m2!1sen!2sin!4v1749655328214!5m2!1sen!2sin"
+                    width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+            <div class="footer-card">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> <a
+                        href="mailto:support@email.com?subject=Support%20Request&body=Hello%20E-shoppy%20User,%0AHow%20can%20I%20help%20you.">
+                        support@email.com
+                    </a></p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+            </div>
+            <div class="footer-card">
+                <h3>Quick Links</h3>
+                <p><a href="#">FAQ</a></p>
+                <p><a href="#">Shipping Info</a></p>
+                <p><a href="#">Enquiry</a></p>
+            </div>
+            <div class="footer-card">
+                <h3>Follow Us</h3>
+                <p><a href="#"><i class="fab fa-facebook"></i> Facebook</a></p>
+                <p><a href="#"><i class="fab fa-instagram"></i> Instagram</a></p>
+                <p><a href="#"><i class="fab fa-whatsapp"></i> Whats app</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 E-Shoppy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDqfJUI0Orck3nDCB2Ulm-AgiZcWV92KcM",
+            authDomain: "democheck-c2d99.firebaseapp.com",
+            databaseURL: "https://democheck-c2d99-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "democheck-c2d99",
+            storageBucket: "democheck-c2d99.appspot.com",
+            messagingSenderId: "870409634136",
+            appId: "1:870409634136:web:68bad3814e92012d7ae52d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const userRef = ref(db, "users");
+        const productRef = ref(db, "products");
+        const orderRef = ref(db, "orders");
+
+        onValue(userRef, (snapshot) => {
+            const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+            document.getElementById("userCount").textContent = count;
+        });
+
+        onValue(productRef, (snapshot) => {
+            const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+            document.getElementById("productCount").textContent = count;
+        });
+
+        onValue(orderRef, (snapshot) => {
+            const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+            document.getElementById("orderCount").textContent = count;
+        });
+
+        const cardsContainer = document.querySelector('.cards-products');
+        let allProducts = [];
+
+        onValue(ref(db, 'products'), (snapshot) => {
+            allProducts = [];
+            snapshot.forEach(product => {
+                const data = product.val();
+                allProducts.push(data);
+            });
+            displayProducts(allProducts, 12); // Show only 12 initially
+        });
+
+        function displayProducts(products, limit = 12) {
+            cardsContainer.innerHTML = '';
+            if (products.length === 0) {
+                cardsContainer.innerHTML = "<p>No matching products found.</p>";
+                return;
+            }
+
+            const displayList = products.slice(0, limit);
+            displayList.forEach(data => {
+                const title = data.title || "No Title";
+                const image = data.image || "https://via.placeholder.com/150";
+                const price = data.price || 0;
+                const discount = parseFloat(data.discount || 0);
+                const discountedPrice = price - (price * discount / 100);
+                const avg = avgRating(data.rating);
+                const stars = generateStars(avg);
+
+                const card = document.createElement('div');
+                card.className = 'productcard';
+                card.innerHTML = `
+                <img src="${image}" alt="${title}">
+                <h2>${title}</h2>
+                <h3><span style="text-decoration: line-through; color: gray;">₹${price}</span> 
+                <span style="color: green;">₹${discountedPrice.toFixed(0)}</span></h3>
+                <span style="color: red; font-size: 0.9em;">(${discount}% OFF)</span>
+                <div class="stars">${stars} (${avg.toFixed(1)})</div>
+                <button class="buy-now-btn">More Details</button>
+            `;
+
+                card.querySelector('.buy-now-btn').addEventListener('click', () => {
+                    const user = sessionStorage.getItem('user');
+                    window.location.href = user ? 'user.html' : 'login.html';
+                });
+
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        function avgRating(ratingObj) {
+            if (!ratingObj || typeof ratingObj !== 'object') return 0;
+            const values = Object.values(ratingObj).map(r => parseFloat(r));
+            if (values.length === 0) return 0;
+            const sum = values.reduce((acc, val) => acc + val, 0);
+            return sum / values.length;
+        }
+
+        function generateStars(avg) {
+            const fullStars = Math.floor(avg);
+            const halfStar = avg % 1 >= 0.5;
+            let stars = '★'.repeat(fullStars);
+            if (halfStar) stars += '½';
+            return stars.padEnd(5, '☆');
+        }
+
+        function debounce(func, delay) {
+            let timeout;
+            return function () {
+                clearTimeout(timeout);
+                timeout = setTimeout(func, delay);
+            };
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchBtn');
+
+        function handleSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) {
+                displayProducts(allProducts, 12); // reset to initial
+                return;
+            }
+
+            const filtered = allProducts.filter(p =>
+                p.title && p.title.toLowerCase().includes(query)
+            );
+
+            displayProducts(filtered, filtered.length); // show all matching
+        }
+
+        searchButton.addEventListener('click', debounce(handleSearch, 300));
+        searchInput.addEventListener('input', debounce(handleSearch, 300));
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+
+        document.getElementById('category_filter').addEventListener('change', applyFilters);
+        document.getElementById('price_sort').addEventListener('change', applyFilters);
+        document.getElementById('ratings_sort').addEventListener('change', applyFilters);
+        document.getElementById('Gender').addEventListener('change', applyFilters);
+        document.getElementById('discount_filter').addEventListener('change', applyFilters);
+
+        function applyFilters() {
+            let filtered = [...allProducts];
+            const category = document.getElementById('category_filter').value.toLowerCase();
+            const priceSort = document.getElementById('price_sort').value;
+            const ratingsFilter = document.getElementById('ratings_sort').value;
+            const gender = document.getElementById('Gender').value.toLowerCase();
+            const discountFilter = parseInt(document.getElementById('discount_filter').value);
+
+            if (category) filtered = filtered.filter(p => p.category?.toLowerCase() === category);
+            if (gender) filtered = filtered.filter(p => p.gender?.toLowerCase() === gender);
+            if (!isNaN(discountFilter)) filtered = filtered.filter(p => parseFloat(p.discount || 0) >= discountFilter);
+
+            if (priceSort === 'ascending') filtered.sort((a, b) => a.price - b.price);
+            else if (priceSort === 'decending') filtered.sort((a, b) => b.price - a.price);
+
+            if (ratingsFilter === 'asc_rating') {
+                filtered = filtered.filter(p => {
+                    const avg = avgRating(p.rating);
+                    return avg >= 1 && avg <= 3;
+                });
+            } else if (ratingsFilter === 'desc_rating') {
+                filtered = filtered.filter(p => avgRating(p.rating) > 4);
+            }
+
+            displayProducts(filtered, filtered.length); // show all filtered
+        }
+    </script>
+
+</body>
+
+</html>

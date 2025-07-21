@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <title>Order Details</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        /* span {
+            display: none;
+        } */
+
+        #logo video {
+            height: 100px;
+        }
+
+        #logout-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgb(255, 255, 255);
+            margin-top: -105px;
+        }
+
+        #logout-container h2 {
+            margin-left: 100px;
+        }
+
+        #logout-container button {
+            background-color: rgb(253, 2, 2);
+            padding: 10px;
+            width: 80px;
+            height: 40px;
+            margin-top: 30px;
+            margin-right: 20px;
+            border-radius: 10px;
+            font-size: medium;
+            font-weight: bold;
+            border: none;
+            color: aliceblue;
+        }
+
+        #logout-container button:hover {
+            background-color: rgb(243, 71, 56);
+        }
+
+        #container_nav {
+            width: 60%;
+            margin-left: 30%;
+            margin-top: -100px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+            background-color: #e6e0ff;
+        }
+
+        .nav-bar ul {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+            padding: 15px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .nav-bar ul li a {
+            position: relative;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .nav-bar ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+            background-color: #000;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-bar ul li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-bar ul li {
+            position: relative;
+        }
+
+
+        #orderList {
+            margin: auto;
+            width: 80%;
+            background-color: antiquewhite;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 20px;
+            gap: 40px;
+        }
+
+        .ordercard {
+            width: 98%;
+            padding: 10px;
+            background-color: aliceblue;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+
+        .ordercard img {
+            height: 100px;
+            width: 100px;
+        }
+
+        .ordercard button {
+            background-color: cornflowerblue;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: medium;
+            font-weight: bold;
+            float: right;
+            margin-left: 10px;
+            margin-top: -35px;
+        }
+
+        .stars {
+            color: rgb(196, 157, 0);
+            font-size: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .comments h2 {
+            background-color: rgb(27, 0, 80);
+            color: aliceblue;
+            padding: 5px;
+
+        }
+
+        .ordercard button:hover {
+            transform: translateY(-4px);
+            background-color: rgb(10, 0, 21);
+            color: aliceblue;
+        }
+
+        .ordercard:hover {
+            background-color: rgb(241, 228, 255);
+        }
+
+        #containerprice {
+            background-color: rgb(255, 255, 255);
+            margin: auto;
+            width: 80%;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            font-size: large;
+        }
+
+        #containerprice {
+            width: 40%;
+        }
+
+        #totalPrice {
+            display: flex;
+            gap: 100px;
+        }
+
+        .price button {
+            margin-top: 130px;
+            background-color: rgb(45, 0, 101);
+            color: #e6e0ff;
+            padding: 10px;
+            font-size: medium;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .price button:hover {
+            background-color: rgb(4, 253, 4);
+            color: #000;
+        }
+
+        /* ------------------- Responsive Media Queries ------------------- */
+        @media screen and (max-width: 1024px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+
+            #container_nav {
+                width: 65%;
+                margin-top: 10px;
+            }
+
+            #logout-container {
+                height: 100px;
+            }
+
+            #logout-container h2 {
+                font-size: 1.3em;
+            }
+
+            .ordercard img {
+                height: 100px;
+                width: 100px;
+            }
+
+            #orderList {
+                width: 80%;
+                grid-template-columns: repeat(2, 1fr);
+                padding: 20px;
+            }
+             #containerprice {
+                font-size: medium;
+                width: 60%;
+            }
+
+            #totalPrice {
+                display: flex;
+                gap: 50px;
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #logout-container {
+                justify-content: center;
+                gap: 10px;
+                margin-top: -110px;
+                height: 110px;
+            }
+
+            #logout-container h2 {
+                margin-left: 70px;
+                text-align: center;
+            }
+
+            #logout-container button {
+                margin-left: 100px;
+                text-align: center;
+            }
+
+            #container_nav {
+                width: 65%;
+                margin-top: 10px;
+            }
+
+            .nav-bar ul {
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .nav-bar ul li a {
+                font-size: 1em;
+            }
+
+
+            .ordercard img {
+                height: 180px;
+            }
+
+            #orderList {
+                width: 80%;
+                grid-template-columns: repeat(2, 1fr);
+                padding: 20px;
+            }
+
+            #containerprice {
+                font-size: small;
+                width: 90%;
+            }
+
+            #totalPrice {
+                display: flex;
+                gap: 50px;
+            }
+
+        }
+
+        @media screen and (max-width: 480px) {
+            #logo video {
+                height: 60px;
+            }
+
+            .nav-bar ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .nav-bar ul li a {
+                font-size: 0.95em;
+            }
+
+            #orderList {
+                width: 80%;
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .ordercard img {
+                height: 100px;
+            } 
+            #containerprice {
+                font-size: small;
+                width: 90%;
+            }
+
+            #totalPrice {
+                display: flex;
+                gap: 50px;
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .ordercard h3 {
+                font-size: 1em;
+            }
+
+            #orderList {
+                width: 90%;
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .ordercard img {
+                height: 100px;
+                width: 100px;
+            }
+
+            .order-user-details,
+            .payment-details {
+                font-size: 0.85em;
+            }
+
+            .stars {
+                font-size: 16px;
+            }
+             #containerprice {
+                font-size: small;
+                width: 90%;
+            }
+
+            #totalPrice {
+                display: flex;
+                gap: 50px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .ordercard {
+                padding: 10px;
+            }
+
+            .ordercard img {
+                max-height: 180px;
+            }
+
+            .feedback-form select,
+            .feedback-form textarea,
+            .feedback-form button {
+                font-size: 0.9em;
+            }
+
+            .cancel-btn {
+                font-size: 0.85em;
+            }
+             #containerprice {
+                font-size: small;
+                width: 90%;
+            }
+
+            #totalPrice {
+                display: flex;
+                gap: 50px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="logo">
+        <video autoplay muted loop playsinline>
+            <source src="./images/logo.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <!-- Logout -->
+    <div id="logout-container">
+        <h2>
+            <font size="6px">E-Shoppy</font> <br> Shop Anywhere
+        </h2>
+
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <div id="container_nav">
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="User_dashboard.html">Home</a></li>
+                <li><a href="Myorder.html">My orders</a></li>
+                <li><a href="User_dashboard.html">Store</a></li>
+                <li>
+                    <a href="order.html"><i class="fas fa-shopping-cart" class="cart-btn"
+                            style="cursor:pointer;"></i></a>
+                </li>
+                <li><i class="fa-solid fa-heart"></i></li>
+                <li><b><i class="fas fa-user-circle"></i>
+                        <font color="green"><span id="user-email"></span></font>
+                    </b></li>
+            </ul>
+        </nav>
+    </div><br>
+    <center>
+        <h2>Book Your Products & Get On Time!</h2>
+    </center>
+
+    <div id="orderList"></div>
+    <div id="containerprice">
+
+        <div id="totalPrice"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+        import {
+            getDatabase,
+            ref,
+            onValue,
+            get,
+            remove,
+            update
+        } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDqfJUI0Orck3nDCB2Ulm-AgiZcWV92KcM",
+            authDomain: "democheck-c2d99.firebaseapp.com",
+            databaseURL: "https://democheck-c2d99-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "democheck-c2d99",
+            storageBucket: "democheck-c2d99.appspot.com",
+            messagingSenderId: "870409634136",
+            appId: "1:870409634136:web:68bad3814e92012d7ae52d",
+            measurementId: "G-KB6RD571R1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const cardsContainer = document.querySelector('#orderList');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-email').innerText = user.email;
+
+                onValue(ref(db, 'orders'), (snapshot) => {
+                    const allOrders = [];
+                    snapshot.forEach(order => {
+                        const data = order.val();
+                        if (data.buyerID === user.uid && data.status === "pending") {
+                            data.id = order.key;
+                            allOrders.push(data);
+                        }
+                    });
+
+                    displayorders(allOrders);
+                });
+
+            } else {
+                window.location.href = "index.html";
+            }
+        });
+
+        function displayorders(orders) {
+            cardsContainer.innerHTML = '';
+            let totalPrice = 0;
+            let processed = 0;
+            const deliver = 20;
+
+            if (orders.length === 0) {
+                cardsContainer.innerHTML = "<p>No orders found.</p>";
+                document.getElementById('totalPrice').innerHTML = '';
+                return;
+            }
+
+            orders.forEach(data => {
+                const productID = data.productID;
+                let order = data.id;
+
+                get(ref(db, 'products/' + productID)).then(snapshot => {
+                    processed++;
+
+                    const product = snapshot.val();
+                    if (product) {
+                        const price = parseFloat(product.price || 0);
+                        const discount = parseFloat(product.discount || 0);
+                        const discountedPrice = price * (1 - discount / 100);
+                        const originalPrice = price.toFixed(2);
+                        const discountPercent = discount.toFixed(0);
+                        const quantity = data.quantity || 1;
+
+                        totalPrice += discountedPrice * quantity;
+
+                        const ratings = product.rating || [];
+                        let avg = 0;
+                        if (ratings.length > 0) {
+                            let sum = ratings.reduce((acc, r) => acc + parseFloat(r), 0);
+                            avg = sum / ratings.length;
+                        }
+
+                        const stars = generateStars(avg);
+                        const comments = product.comments || [];
+
+                        const card = document.createElement('div');
+                        card.className = 'ordercard';
+
+                        card.innerHTML = `
+                        <img src="${product.image}" alt="${product.title}">
+                        <h3>${product.title}</h3>
+                        <p class="price">
+                            <span style="text-decoration: line-through; color: gray;">₹${originalPrice}</span>
+                            ₹${discountedPrice.toFixed(2)} <span style="color:red;"> (${discountPercent}% OFF)</span>
+                        </p>
+                        <p class="description">${product.description}</p>
+                        <label>Quantity: 
+                            <input type="number" class="quantity-input" data-price="${discountedPrice}" value="${quantity}" min="1" style="width:60px;">
+                        </label>
+                        <div class="stars">${stars} ${avg.toFixed(1)}</div>
+                        <button class="remove-btn" data-id="${order}">Remove</button>
+                        <div class="comments"><b><h2>💬 Comments</h2></b>${comments.map(c => `<p><b>${c.user}</b>: ${c.text}</p>`).join("") || "No comments"}</div>
+                    `;
+
+                        cardsContainer.appendChild(card);
+
+                        const qtyInput = card.querySelector('.quantity-input');
+                        qtyInput.addEventListener('input', () => {
+                            const newQty = parseInt(qtyInput.value);
+                            if (isNaN(newQty) || newQty < 1) {
+                                alert("Please enter a valid quantity.");
+                                qtyInput.value = 1;
+                                return;
+                            }
+
+                            data.quantity = newQty;
+
+                            // Update quantity in Firebase
+                            update(ref(db, 'orders/' + data.id), {
+                                quantity: newQty
+                            }).then(() => {
+                                calculateTotal();
+                            }).catch((err) => {
+                                console.error("Failed to update quantity:", err);
+                            });
+                        });
+
+                        const removeBtn = card.querySelector('.remove-btn');
+                        removeBtn.addEventListener('click', (e) => {
+                            const orderId = e.target.getAttribute('data-id');
+                            if (confirm("Are you sure you want to delete this order?")) {
+                                remove(ref(db, 'orders/' + orderId))
+                                    .then(() => {
+                                        alert("Order removed successfully.");
+                                        e.target.closest('.ordercard').remove();
+                                        location.reload();
+                                    })
+                                    .catch(err => {
+                                        console.error("Delete failed:", err);
+                                        alert("Failed to remove order.");
+                                    });
+                            }
+                        });
+                    }
+
+                    if (processed === orders.length) {
+                        calculateTotal();
+                    }
+                });
+            });
+
+            function generateStars(avg) {
+                const fullStars = Math.floor(avg);
+                const halfStar = avg % 1 >= 0.5;
+                let stars = '★'.repeat(fullStars);
+                if (halfStar) stars += '½';
+                return stars.padEnd(5, '☆');
+            }
+
+            function calculateTotal() {
+                const inputs = document.querySelectorAll('.quantity-input');
+                let newTotal = 0;
+                inputs.forEach(input => {
+                    const price = parseFloat(input.getAttribute('data-price'));
+                    const qty = parseInt(input.value) || 1;
+                    newTotal += price * qty;
+                });
+
+                const final = newTotal + deliver;
+
+                document.getElementById('totalPrice').innerHTML = `
+                <div class="price">
+                    <p>🧾 Total Order Amount: </p> 
+                    <p>🧾 Delivery Charge: </p>
+                    <p>🧾 Total Payable: </p>
+                </div>
+                <div class="price">
+                    <h3>₹${newTotal.toFixed(2)}</h3>
+                    <h3>₹${deliver.toFixed(2)}</h3><hr>
+                    <h3><font color="red">₹${final.toFixed(2)}</font></h3>
+                    <hr>
+                </div>
+                <div class="price">
+                    <button id="place-order-btn">Place Order</button>
+                </div>`;
+            }
+        }
+
+        document.getElementById('logout-btn').addEventListener("click", async () => {
+            await signOut(auth);
+            alert("Logged out successfully");
+            window.location.href = "index.html";
+        });
+
+        if (sessionStorage.getItem("role") !== "buyer") {
+            window.location.href = "admin_dashboard.html";
+        }
+
+        document.addEventListener("click", function (e) {
+            if (e.target && e.target.id === "place-order-btn") {
+                if (confirm("Proceed to payment and shipping details?")) {
+                    const user = auth.currentUser;
+                    const orderIDs = [];
+
+                    onValue(ref(db, 'orders'), (snapshot) => {
+                        snapshot.forEach(order => {
+                            const orderData = order.val();
+                            if (orderData.buyerID === user.uid && orderData.status === "pending") {
+                                orderIDs.push(order.key);
+                            }
+                        });
+
+                        localStorage.setItem("pendingOrderIDs", JSON.stringify(orderIDs));
+                        window.location.href = "payment.html";
+                    }, { onlyOnce: true });
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

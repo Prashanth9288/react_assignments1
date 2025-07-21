@@ -1,0 +1,522 @@
+{
+  "orders": {
+    "-OSeVftgfmT_IGKuEvto": {
+      "address": "123 MG Road, Bangalore",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "UPI",
+        "status": "paid",
+        "transactionID": "TXN1001"
+      },
+      "phone": "9876543210",
+      "productID": "-PROD2",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "delivered",
+      "timestamp": 1749838643006,
+      "totalPrice": 32000
+    },
+    "-OShHluWbp7t5RdXc7lE": {
+      "address": "45 Residency Rd, Mumbai",
+      "buyerID": "e1MZZ2rjJ8fV0Ogv5OkCDHsbZ6I3",
+      "payment": {
+        "method": "Card",
+        "status": "paid",
+        "transactionID": "TXN1002"
+      },
+      "phone": "9123456780",
+      "productID": "-PROD4",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "shipped",
+      "timestamp": 1749885329885,
+      "totalPrice": 29000
+    },
+    "-OShHnBhZVQzOaGgnzGr": {
+      "address": "45 Residency Rd, Mumbai",
+      "buyerID": "e1MZZ2rjJ8fV0Ogv5OkCDHsbZ6I3",
+      "payment": {
+        "method": "COD",
+        "status": "pending",
+        "transactionID": ""
+      },
+      "phone": "9123456780",
+      "productID": "-PROD4e13f60e",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749885335186,
+      "totalPrice": 50000
+    },
+    "-OShT5OjEIJXNQ_3mDGN": {
+      "address": "45 Residency Rd, Mumbai",
+      "buyerID": "e1MZZ2rjJ8fV0Ogv5OkCDHsbZ6I3",
+      "payment": {
+        "method": "Card",
+        "status": "paid",
+        "transactionID": "TXN1003"
+      },
+      "phone": "9123456780",
+      "productID": "-PROD1",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "delivered",
+      "timestamp": 1749888297484,
+      "totalPrice": 2499
+    },
+    "-OShVTJwBzkgoxz-Qq7D": {
+      "address": "45 Residency Rd, Mumbai",
+      "buyerID": "e1MZZ2rjJ8fV0Ogv5OkCDHsbZ6I3",
+      "payment": {
+        "method": "UPI",
+        "status": "paid",
+        "transactionID": "TXN1004"
+      },
+      "phone": "9123456780",
+      "productID": "-PROD1",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "pending",
+      "timestamp": 1749888919782,
+      "totalPrice": 2499
+    },
+    "-OShYmhzvw_c3jKj_e9r": {
+      "address": "45 Residency Rd, Mumbai",
+      "buyerID": "e1MZZ2rjJ8fV0Ogv5OkCDHsbZ6I3",
+      "payment": {
+        "method": "COD",
+        "status": "pending",
+        "transactionID": ""
+      },
+      "phone": "9123456780",
+      "productID": "-PROD3",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "pending",
+      "timestamp": 1749889789755,
+      "totalPrice": 75000
+    },
+    "-OSi65AR28glybV-pOAs": {
+      "address": "123 MG Road, Bangalore",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "Card",
+        "status": "refunded",
+        "transactionID": "TXN1005"
+      },
+      "phone": "9876543210",
+      "productID": "-PROD1",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "cancelled",
+      "timestamp": 1749899044713,
+      "totalPrice": 2499
+    },
+    "-OSiq0XwSiQK2Em74Th3": {
+      "address": "123 MG Road, Bangalore",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "UPI",
+        "status": "paid",
+        "transactionID": "TXN1006"
+      },
+      "phone": "9876543210",
+      "productID": "-PROD8",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749911346773,
+      "totalPrice": 1499
+    },
+    "-OSjA1bOOOjDVq0OIaVT": {
+      "address": "123 MG Road, Bangalore",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "Card",
+        "status": "refunded",
+        "transactionID": ""
+      },
+      "phone": "9876543210",
+      "productID": "-PROD4",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "cancelled",
+      "timestamp": 1749916856358,
+      "totalPrice": 29000
+    },
+    "-OSjZn37Bt-qIPMNA2EL": {
+      "address": "Magadi Road",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "COD",
+        "status": "refunded",
+        "transactionID": ""
+      },
+      "phone": "8892882627",
+      "productID": "-PROD5",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "cancelled",
+      "timestamp": 1749923606290,
+      "totalPrice": 1899
+    },
+    "-OSjgSF5FZ2O633GB4sI": {
+      "address": "Magadi Road",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "UPI",
+        "status": "refunded",
+        "transactionID": ""
+      },
+      "phone": "8892882627",
+      "productID": "-PROD9",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "cancelled",
+      "timestamp": 1749925614246,
+      "totalPrice": 27000
+    },
+    "-OSjpLTGJYE7kpa24V2k": {
+      "address": "ABCS",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "COD",
+        "status": "pending",
+        "transactionID": ""
+      },
+      "phone": "1234567890",
+      "productID": "-PROD7",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749927945728,
+      "totalPrice": 4999
+    },
+    "-OSm0-lkOxbVYDW-MG7P": {
+      "address": "ABCS",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "COD",
+        "status": "pending",
+        "transactionID": ""
+      },
+      "phone": "1234567890",
+      "productID": "-PROD2",
+      "quantity": 2,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749964558259,
+      "totalPrice": 32000
+    },
+    "-OSmSiYRHj1FFdBW15Qd": {
+      "address": "#414, 8TH F CROSS NETAJI NAGAR",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "Card",
+        "status": "pending",
+        "transactionID": ""
+      },
+      "phone": "8892882627",
+      "productID": "-PROD1",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749972085950,
+      "totalPrice": 2499
+    },
+    "-OSmf2aAeNLr0p-dsxzC": {
+      "address": "Magadi Road",
+      "buyerID": "ghxqVG184hSdo6kNwTMTMPM79eZ2",
+      "payment": {
+        "method": "COD",
+        "status": "pending",
+        "transactionID": ""
+      },
+      "phone": "1234567890",
+      "productID": "-PROD8",
+      "quantity": 3,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749975580240,
+      "totalPrice": 1499
+    },
+    "-OSmfzl0im6N-gOkYt0n": {
+      "address": "Magadi Road",
+      "buyerID": "ghxqVG184hSdo6kNwTMTMPM79eZ2",
+      "payment": {
+        "method": "COD",
+        "status": "paid",
+        "transactionID": "TXN1007"
+      },
+      "phone": "1234567890",
+      "productID": "-OSmfmJCF8gcmKdogg1o",
+      "quantity": 2,
+      "sellerID": "m4Kl5fz9iPTFgvfbBVbTwtGbjez1",
+      "status": "delivered",
+      "timestamp": 1749975826562,
+      "totalPrice": 5000
+    },
+    "-OSmx-ICtjisql0mOFws": {
+      "address": "Hema 123 f cross",
+      "buyerID": "gWKP4UlSTUThugqaHL1mciHbFw82",
+      "payment": {
+        "method": "UPI",
+        "status": "paid",
+        "transactionID": "TXN1008"
+      },
+      "phone": "8892882627",
+      "productID": "-PROD8",
+      "quantity": 1,
+      "sellerID": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "status": "awaiting",
+      "timestamp": 1749980283801,
+      "totalPrice": 1499
+    }
+  },
+  "products": {
+    "-PROD1": {
+      "category": "electronics",
+      "comments": [
+        {
+          "text": "Great sound quality.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Battery lasts long.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Noise Cancelling Wireless Earbuds",
+      "discount": "10",
+      "image": "./images/Electronics/earphone.png",
+      "price": "2499",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "One Size",
+      "title": "Bluetooth Earphones"
+    },
+    "-PROD2": {
+      "category": "electronics",
+      "comments": [
+        {
+          "text": "Amazing picture quality.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Good for the price.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Good Product",
+          "user": "hem@gmail.com"
+        }
+      ],
+      "description": "42-inch 4K Ultra HD Smart TV",
+      "discount": "15",
+      "image": "https://th.bing.com/th/id/OIP.44_RmlNP-Nu6NsrlDKET4wHaE7?w=258&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "32000",
+      "rating": [4, 5, 3, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "42 inch",
+      "title": "LED TV"
+    },
+    "-PROD3": {
+      "category": "electronics",
+      "comments": [
+        {
+          "text": "Perfect for work and gaming.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Fast and powerful.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Intel i7 12th Gen, 16GB RAM, 1TB SSD",
+      "discount": "50",
+      "image": "https://th.bing.com/th/id/OIP.qZQX27hMsDHPuXZHgzi-DAHaHZ?w=195&h=195&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "75000",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "15.6 inch",
+      "title": "Laptop"
+    },
+    "-PROD4": {
+      "category": "home_appliances",
+      "comments": [
+        {
+          "text": "Cleans well and is quiet.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Very easy to operate.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Front Load Fully Automatic 7kg",
+      "discount": "2",
+      "image": "https://th.bing.com/th/id/OIP.yWX4nVcecPiACnTc1r_eMQHaJm?w=146&h=189&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "29000",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "7 kg",
+      "title": "Washing Machine"
+    },
+    "-PROD4e13f60e": {
+      "category": "mobiles",
+      "comments": [
+        {
+          "text": "Great product!",
+          "user": "hema@gmail.com"
+        },
+        {
+          "text": "Good value.",
+          "user": "john@example.com"
+        }
+      ],
+      "description": "Galaxy S25",
+      "discount": "20",
+      "image": "https://th.bing.com/th/id/OIP.rO22HI7yBU3GPEg_mXkZVQHaHa?w=173&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "50000",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "6.5 inch",
+      "title": "Smartphone"
+    },
+    "-PROD5": {
+      "category": "dress",
+      "comments": [
+        {
+          "text": "Stylish and warm.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Fits perfectly.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Winter Jacket - Black",
+      "discount": 10,
+      "image": "https://th.bing.com/th/id/OIP.R5tTGniZ2Z1yGS-kJnzRXwHaJQ?w=208&h=260&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "1899",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "L",
+      "title": "Men's Jacket"
+    },
+    "-PROD6": {
+      "category": "electronics",
+      "comments": [
+        {
+          "text": "Heats evenly.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Useful for baking.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "30L Convection Microwave",
+      "discount": 10,
+      "image": "./images/Electronics/microoven.png",
+      "price": "10999",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "30L",
+      "title": "Microwave Oven"
+    },
+    "-PROD7": {
+      "category": "electronics",
+      "comments": [
+        {
+          "text": "Good for tracking steps.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Display could be brighter.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Fitness Tracker with Heart Rate Monitor",
+      "discount": 10,
+      "image": "https://th.bing.com/th/id/OIP.cG4nEOgBsF6d3Hdv-CDI-AHaF5?w=265&h=204&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "4999",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "One Size",
+      "title": "Smartwatch"
+    },
+    "-PROD8": {
+      "category": "dress",
+      "comments": [
+        {
+          "text": "Lovely fabric.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Looks beautiful.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Floral Print Maxi Dress",
+      "discount": 10,
+      "image": "https://th.bing.com/th/id/OIP.ZES7WZi8LlO9FTNWkAaZPQAAAA?w=208&h=208&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "1499",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "M",
+      "title": "Women's Dress"
+    },
+    "-PROD9": {
+      "category": "electronics",
+      "comments": [
+        {
+          "text": "Spacious and cools well.",
+          "user": "Anonymous"
+        },
+        {
+          "text": "Energy efficient.",
+          "user": "Anonymous"
+        }
+      ],
+      "description": "Double Door, 265L, Inverter Technology",
+      "discount": 10,
+      "image": "https://th.bing.com/th/id/OIP.8iAuIbMr3kAk1DLODdf8uAHaHa?w=217&h=217&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "price": "27000",
+      "rating": [4, 5, 3],
+      "seller": "f1oHUU4d3xN9oPH3l8liXKyCM7E3",
+      "size": "265L",
+      "title": "Refrigerator"
+    }
+  },
+  "users": {
+    "T0kiin3kFUUDyDhMOSdbLP60xv12": {
+      "email": "admin@gmail.com",
+      "role": "admin"
+    },
+    "Y2c4epsPxNhvUYzMPUvc2hVHXBF3": {
+      "email": "seller1@gmail.com",
+      "role": "seller"
+    },
+    "e1MZZ2rjJ8fV0Ogv5OkCDHsbZ6I3": {
+      "email": "hemavathi@gmail.com",
+      "role": "buyer"
+    },
+    "f1oHUU4d3xN9oPH3l8liXKyCM7E3": {
+      "email": "seller@gmail.com",
+      "role": "seller"
+    },
+    "gWKP4UlSTUThugqaHL1mciHbFw82": {
+      "email": "hem@gmail.com",
+      "role": "buyer"
+    },
+    "ghxqVG184hSdo6kNwTMTMPM79eZ2": {
+      "email": "hemavathik@gmail.com",
+      "role": "buyer"
+    },
+    "m4Kl5fz9iPTFgvfbBVbTwtGbjez1": {
+      "email": "sellers1@gmail.com",
+      "role": "seller"
+    }
+  }
+}

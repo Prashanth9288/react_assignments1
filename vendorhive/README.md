@@ -1,0 +1,1 @@
+# VendorHive - E-commerce Platform for Small Businesses

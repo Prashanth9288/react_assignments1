@@ -1,0 +1,58 @@
+.app {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 4rem;
+  margin: 10px 0;
+}
+
+.goal-message {
+  color: green;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:nth-child(2) {
+  background-color: #f0ad4e;
+}
+
+button:nth-child(2):hover {
+  background-color: #ec971f;
+}
+
+button:nth-child(3) {
+  background-color: #d9534f;
+}
+
+button:nth-child(3):hover {
+  background-color: #c9302c;
+}

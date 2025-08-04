@@ -1,21 +1,16 @@
-// function Button(props){
-//   return <button>{props.label}</button>
-// }
 
-// function App(){
-//   return(
-//     <div>
-//       <Button label="Click Me"/>
-//       <Button label="Submit"/>
-//     </div>
-//   );
-// }
-// export default App;
-
-const name="prashanth";
-  function Greeting(){
-  return <h1>{name}</h1>
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home.jsx"
+import RecipeDetail from "./pages/RecipeDetail.jsx";
+function App(){
+  return(
+    <div style={{padding:"20px", textAlign:"center"}}>
+      <h1>Recipe Finder App</h1>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/recipe/:id"  element={<RecipeDetail/>}/>
+      </Routes>
+    </div>
+  )
 }
-
-export default Greeting;
-
+export default App;

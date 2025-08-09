@@ -24,7 +24,7 @@ function RecipeDetailPage(){
       <img src={recipe.image} alt={recipe.name}  style={{width:"200px",borderRadius:"6px"}}/>
       <p><strong>Cuisine:</strong>{recipe.cuisine}</p>
       <p><strong>Difficulty:</strong>{recipe.difficulty}</p>
-      <p><stron>Ingredients:</stron>
+      <p><strong>Ingredients:</strong>
       <ul>
         {recipe.ingredients.map((item,index)=>(
           <li key={index}>{item}</li>

@@ -1,4 +1,6 @@
-import Myform from "./components/EditForm"
+
+//import MyApp from "./components/EditForm"
+import FetchPokemon from "./components/Fetch"
 
 
 function App() {
@@ -6,7 +8,7 @@ function App() {
 
   return (
    <>
-   <Myform/>
+   <FetchPokemon/>
    </>
   )
 }

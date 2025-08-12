@@ -1,46 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function FormAdd() {
-  const [input, setInput] = useState("");
-  const [list, setList] = useState([]);
 
-  const handleAdd = (e) => {
-    e.preventDefault();
-    if (input.trim() === "") return; // prevent adding empty
-    setList([...list, input]);
-    setInput(""); // clear input after adding
-  };
+export default function MyApp() {
+  const [users, setUsers] = useState([]);
 
-  const handleDelete = (e) =>{
-    //use filter function and remove deleted index element in list 
-  }
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data = await res.json();
 
-  // const handleEdit = (e) =>{
+        // Add random image for each user
+        const usersWithImages = data.map(user => ({
+          ...user,
+          image: `https://i.pravatar.cc/150?img=${user.id}` // placeholder image
+        }));
 
-  // }
+        setUsers(usersWithImages);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   return (
     <div>
-      <form onSubmit={handleAdd}>
-        <label htmlFor="input">Name:</label>
-        <input
-          type="text"
-          placeholder="Enter name"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        {list.map((each, index) => (
-          <>
-          <li key={index}>{each}</li>
-          <button>edit</button>
-          <button>delete</button>
-          </>
-          
-        ))}
-      </ul>
+      <h2>Users</h2>
+      {users.map(user => (
+        <div key={user.id} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+          <img
+            src={user.image}
+            alt={user.name}
+            style={{ width: "50px", height: "50px", borderRadius: "50%", marginRight: "10px" }}
+          /><br/> <br/>
+          <p>{user.name}</p>
+        </div>
+      ))}
     </div>
   );
 }

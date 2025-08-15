@@ -1,34 +1,40 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { useAuth } from './AuthContext';
-import { openStream } from '../lib/stream';
-import * as api from '../api/projects';
+import { createContext, useContext, useEffect, useState } from "react";
+import { db } from "../firebase/firebase";
+import { ref, onValue, push, remove, set, update } from "firebase/database";
 
-const ProjectsContext = createContext();
+const ProjectsContext = createContext(null);
+
+export const useProjects = () => useContext(ProjectsContext);
 
 export function ProjectsProvider({ children }) {
-  const { user } = useAuth();
-  const [projects, setProjects] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    if (!user) {
-      setProjects({});
-      return;
-    }
-    const close = openStream(`/users/${user.uid}/projects`, (data) => {
-      setProjects(data || {});
-      setLoading(false);
+    const projectsRef = ref(db, "projects");
+    const unsubscribe = onValue(projectsRef, (snapshot) => {
+      const data = snapshot.val();
+      const loadedProjects = data
+        ? Object.entries(data).map(([id, project]) => ({ id, ...project }))
+        : [];
+      setProjects(loadedProjects);
     });
-    return close;
-  }, [user]);
+
+    return () => unsubscribe();
+  }, []);
+
+  const addProject = (project) => {
+    const projectsRef = ref(db, "projects");
+    push(projectsRef, { ...project, createdAt: Date.now() });
+  };
+
+  const deleteProject = (id) => remove(ref(db, `projects/${id}`));
+
+  const updateProject = (id, updatedData) =>
+    update(ref(db, `projects/${id}`), updatedData);
 
   return (
-    <ProjectsContext.Provider value={{ projects, loading, ...api, uid: user?.uid }}>
+    <ProjectsContext.Provider value={{ projects, addProject, deleteProject, updateProject }}>
       {children}
     </ProjectsContext.Provider>
   );
-}
-
-export function useProjects() {
-  return useContext(ProjectsContext);
 }

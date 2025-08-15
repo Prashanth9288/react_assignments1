@@ -1,22 +1,23 @@
-import { Link } from 'react-router-dom';
-import { useProjects } from '../context/ProjectsContext';
+import { useProjects } from "../context/ProjectsContext";
 
 export default function Dashboard() {
-  const { projects, loading } = useProjects();
+  const context = useProjects();
+  if (!context) return <p>Loading...</p>;
 
-  if (loading) return <p>Loading projects...</p>;
+  const { projects } = context;
 
   return (
     <div>
       <h1>Dashboard</h1>
-      <Link to="/projects/new">Add Project</Link>
-      <ul>
-        {Object.entries(projects).map(([id, project]) => (
-          <li key={id}>
-            <Link to={`/projects/${id}`}>{project.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {projects.length === 0 ? (
+        <p>No projects found.</p>
+      ) : (
+        <ul>
+          {projects.map((p) => (
+            <li key={p.id}>{p.title}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

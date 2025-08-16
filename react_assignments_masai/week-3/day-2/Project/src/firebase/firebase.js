@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCnBDBseQ-ldvlh13wFfSSdy1CRkTAn6N4",
@@ -10,9 +9,8 @@ const firebaseConfig = {
   storageBucket: "project-tracker-4351b.firebasestorage.app",
   messagingSenderId: "1034737766814",
   appId: "1:1034737766814:web:e336a15ddef9723e71068f",
-  measurementId: "G-PWSJ325FRQ"
+  measurementId: "G-PWSJ325FRQ",
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app);
-export const auth = getAuth(app);

@@ -1,0 +1,48 @@
+{
+  "projects": {
+    "proj1": {
+      "title": "Website Redesign",
+      "description": "Revamp landing page and blog UI.",
+      "createdAt": "2025-08-15T10:00:00Z",
+      "tasks": {
+        "task1": {
+          "title": "Create wireframes",
+          "completed": false,
+          "priority": "high",
+          "createdAt": "2025-08-15T11:00:00Z"
+        },
+        "task2": {
+          "title": "Write landing page copy",
+          "completed": true,
+          "priority": "medium",
+          "createdAt": "2025-08-15T12:00:00Z"
+        }
+      }
+    },
+    "proj2": {
+      "title": "Mobile App MVP",
+      "description": "Build core features for the mobile version.",
+      "createdAt": "2025-08-14T09:00:00Z",
+      "tasks": {
+        "task1": {
+          "title": "User authentication flow",
+          "completed": false,
+          "priority": "high",
+          "createdAt": "2025-08-14T10:00:00Z"
+        },
+        "task2": {
+          "title": "Push notifications setup",
+          "completed": false,
+          "priority": "low",
+          "createdAt": "2025-08-14T10:30:00Z"
+        },
+        "task3": {
+          "title": "App store listing",
+          "completed": false,
+          "priority": "medium",
+          "createdAt": "2025-08-14T11:00:00Z"
+        }
+      }
+    }
+  }
+}
